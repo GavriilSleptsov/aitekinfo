@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=/opt/helper/main.sh
+Icon=/usr/share/pixmaps/pomogator_icon.png
+Name=Помогатор Astra Linux
+Name[ru]=Помогатор Astra Linux
+Categories=None;
+
