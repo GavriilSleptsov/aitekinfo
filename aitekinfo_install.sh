@@ -9,10 +9,10 @@ if dpkg -s git  &>/dev/null; then
         if [ $? -eq 0 ]; then
         zenity --progress --pulsate --title="Установка пакета" --text="Подождите, идет установка..." --auto-close &
         (
-        echo $passwd | sudo -S git clone --depth=1 https://gitflic.ru/project/gabidullin-aleks/pomogator.git /opt/helper
-        echo $passwd | sudo -S chmod +x -R /opt/helper
-        echo $passwd | sudo -S cp /opt/helper/pomogator.desktop -P /usr/share/applications/flydesktop/
-        echo $passwd | sudo -S cp /opt/helper/pomogator_icon.png -P /usr/share/pixmaps/
+        echo $passwd | sudo -S git clone --depth=1 https://github.com/GavriilSleptsov/aitekinfo.git /opt/aitekinfo
+        echo $passwd | sudo -S chmod +x -R /opt/aitekinfo
+        echo $passwd | sudo -S cp /opt/aitekinfo/aitekinfo.desktop -P /usr/share/applications/flydesktop/
+        echo $passwd | sudo -S cp /opt/aitekinfo/aitekinfo_icon.jpg -P /usr/share/pixmaps/
         exit_code=$?
             # Проверка кода завершения и отображение соответствующего сообщения
             if [ $exit_code -eq 0 ]; then
