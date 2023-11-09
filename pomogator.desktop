@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Exec=/opt/aitekinfo/main.sh
-Icon=/usr/share/pixmaps/aitekinfo_icon.png
+Icon=/usr/share/pixmaps/aitekinfo_icon.jpg
 Name=АйтекИнфо
 Name[ru]=АйтекИнфо
 Categories=None;
