@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Exec=/opt/helper/main.sh
-Icon=/usr/share/pixmaps/pomogator_icon.png
-Name=Помогатор Astra Linux
-Name[ru]=Помогатор Astra Linux
+Exec=/opt/aitekinfo/main.sh
+Icon=/usr/share/pixmaps/aitekinfo_icon.png
+Name=АйтекИнфо
+Name[ru]=АйтекИнфо
 Categories=None;
 
