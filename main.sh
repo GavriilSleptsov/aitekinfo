@@ -809,34 +809,34 @@ dinfo_22(){
        
 }
 
-consultant(){
-    passwd=$(zenity --password)
-    check_cancel
-    (
-    echo $passwd | sudo -S apt install wine -y
-    echo $passwd | sudo -S mkdir /mnt/cons
-    echo $passwd | sudo -S chmod -R 0777 /mnt/cons
-    echo $passwd | sudo -S apt install cifs-utils -y
-    #необходимо указать сетевую папку где установлен консультант ( ниже пример )
-    echo $passwd | sudo -S sh -c 'echo "//10.10.80.43/cp /mnt/cons cifs guest,file_mode=0777,dir_mode=0777,iocharset=utf8 0 0" >> /etc/fstab'
-    echo $passwd | sudo -S mount -a  
-      тут скачивается бутылка консультанта, которая заранее была установленна на пк, и далее распространяется уже готовым образом без установки
-    echo $passwd | sudo -S wget http://ip/share/ConsultantPlus.tar.gz -P /opt/
-    echo $passwd | sudo -S tar -xzf /opt/ConsultantPlus.tar.gz -C /opt/
-    echo $passwd | sudo -S rm /opt/ConsultantPlus.tar.gz
-    echo $passwd | sudo -S chmod -R 0777 /opt/.ConsultantPlus
-    echo $passwd | sudo -S wget -O /opt/cons.sh https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=desktop+and+icons%2Fcons.sh
-    echo $passwd | sudo -S chmod +x /opt/cons.sh
-    echo $passwd | sudo -S wget -O /etc/xdg/autostart/cons.desktop https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=desktop+and+icons%2Fcons.desktop 
-    exit_code=$?
-    # Проверка кода завершения и отображение соответствующего сообщения
-        if [ $exit_code -eq 0 ]; then
-            zenity --info --title="Успех" --text="Пакет успешно установлен!"
-        else
-            zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
-        fi
-    ) | zenity --progress --pulsate --auto-close
-}
+#consultant(){
+#    passwd=$(zenity --password)
+#    check_cancel
+#    (
+#    echo $passwd | sudo -S apt install wine -y
+#    echo $passwd | sudo -S mkdir /mnt/cons
+#   echo $passwd | sudo -S chmod -R 0777 /mnt/cons
+#    echo $passwd | sudo -S apt install cifs-utils -y
+#    #необходимо указать сетевую папку где установлен консультант ( ниже пример )
+#    echo $passwd | sudo -S sh -c 'echo "//10.10.80.43/cp /mnt/cons cifs guest,file_mode=0777,dir_mode=0777,iocharset=utf8 0 0" >> /etc/fstab'
+ #   echo $passwd | sudo -S mount -a  
+ #     тут скачивается бутылка консультанта, которая заранее была установленна на пк, и далее распространяется уже готовым образом без установки
+ #   echo $passwd | sudo -S wget http://ip/share/ConsultantPlus.tar.gz -P /opt/
+ #   echo $passwd | sudo -S tar -xzf /opt/ConsultantPlus.tar.gz -C /opt/
+ #   echo $passwd | sudo -S rm /opt/ConsultantPlus.tar.gz
+ #   echo $passwd | sudo -S chmod -R 0777 /opt/.ConsultantPlus
+ #   echo $passwd | sudo -S wget -O /opt/cons.sh https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=desktop+and+icons%2Fcons.sh
+ #   echo $passwd | sudo -S chmod +x /opt/cons.sh
+ #   echo $passwd | sudo -S wget -O /etc/xdg/autostart/cons.desktop https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=desktop+and+icons%2Fcons.desktop 
+ #   exit_code=$?
+ #   # Проверка кода завершения и отображение соответствующего сообщения
+ #       if [ $exit_code -eq 0 ]; then
+ #           zenity --info --title="Успех" --text="Пакет успешно установлен!"
+ #       else
+ #           zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
+ #       fi
+ #   ) | zenity --progress --pulsate --auto-close
+#}
 
 install_virtualbox(){
     passwd=$(zenity --password)
