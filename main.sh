@@ -698,17 +698,6 @@ system_update(){
     echo $passwd | sudo -S apt update -y   
     # Установка пакета с использованием sudo и передачей пароля через stdin
     echo $passwd | sudo -S astra-update -A -r -T
-    # установка сразу puppet агента для дальнейшего управления машинами через групповые политики
-    # echo $passwd | sudo -S apt install puppet-agent -y
-    # echo $passwd | sudo -S sh -c 'echo "[main]" >> /etc/puppetlabs/puppet/puppet.conf'
-    # echo $passwd | sudo -S sh -c 'echo "server = puppet.server.domain" >> /etc/puppetlabs/puppet/puppet.conf'
-    # echo $passwd | sudo -S sh -c 'echo "show_diff = true" >> /etc/puppetlabs/puppet/puppet.conf'
-    # echo $passwd | sudo -S sh -c 'echo "runinterval = 1m" >> /etc/puppetlabs/puppet/puppet.conf'
-    # echo $passwd | sudo -S sh -c 'echo "ip-address    puppet.server.domain" >> /etc/hosts'
-    # echo $passwd | sudo -S ufw allow 8140
-    # echo $passwd | sudo -S systemctl enable puppet
-    # echo $passwd | sudo -S systemctl start puppet
-    # echo $passwd | sudo -S /opt/puppetlabs/bin/puppet agent --test
     # Получение кода завершения установки
     exit_code=$?
     # Проверка кода завершения и отображение соответствующего сообщения
