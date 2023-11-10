@@ -1,7 +1,7 @@
 #!/bin/bash
 #---------------init core config-------------------------------------
 
-path=/opt/helper
+path=/opt/aitekinfo
 source $path/version.sh
 exit_app="Выход"
 exit_menu="Назад"
