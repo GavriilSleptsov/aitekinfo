@@ -13,7 +13,7 @@ papki="1.Необходимо перезайти в сессию.\n2. Перез
 source $path/items_main_menu.sh
 
 #---------------init for item_menu_information_resources_of="Информационные ресурсы СГЭУ"-------------------------------
-source $path/item_menu_information_resources_of_SSEU.sh
+source $path/item_menu_information_resources.sh
 
 #---------------init item_menu_information_instructions="Инструкции "-------------------------------
 source $path/item_menu_information_instructions.sh
@@ -21,20 +21,11 @@ source $path/item_menu_information_instructions.sh
 #---------------item_menu_information_help="Что делать, если не работает?"-------------------------------
 source $path/item_menu_information_help.sh
 
-#---------------init for item_menu_network_folders="Сетевые папки" menu-------------------------------
-source $path/item_menu_network_folders.sh
-
 #---------------init for item_menu_information_install="Установка программ" menu-------------------------------
 source $path/item_menu_information_install.sh
 
 #---------------init for item_menu_information_remove="Удаление программ" menu-------------------------------
 source $path/item_menu_remove_apps.sh
-
-#---------------init for item_menu_information_desktop="рабочий стол" menu-------------------------------
-source $path/item_menu_information_desktop.sh
-
-#---------------init for item_menu_information_desktop="рабочий стол" menu-------------------------------
-source $path/item_menu_information_do.sh
 
 #---------------init for item_menu_information_repo="Добавить сетевые репозитории" menu-------------------------------
 source $path/item_menu_information_repo.sh
@@ -50,12 +41,6 @@ item_menu_firma_Samsung_models=("\"$item_driver_Samsung_ML_2851ND\"" "\"$item_me
 #---------------init for item_menu_firma_Kyocera_models menu-------------------------------
 source $path/item_menu_firma_Kyocera_models.sh
 
-#---------------init item_menu_information_fonts="Установить шрифты" menu-------------------------------
-source $path/item_menu_information_fonts.sh
-
-#---------------init for item_menu_information_author="Связь с автором и пожелания" menu-------------------------------
-source $path/item_menu_information_author.sh
-
 #---------------init for item_menu_information_pomogator="Обновление и нововведения" menu-------------------------------
 source $path/item_menu_information_pomogator.sh
 
@@ -63,8 +48,8 @@ source $path/item_menu_information_pomogator.sh
 declare -A event_menu
 event_menu["$exit_app"]="exit 1"
 
-#-------------init event for item_menu_information_resources_of_SSEU="Информационные ресурсы СГЭУ"-----------------------
-source $path/event_item_menu_information_resources_of_SSEU.sh
+#-------------init event for item_menu_information_resources="Информационные ресурсы СГЭУ"-----------------------
+source $path/event_item_menu_information_resources.sh
 
 #-------------init event for item_menu_information_instructions="Инструкции СГЭУ"-----------------------
 source $path/event_item_menu_information_instruction.sh
@@ -74,23 +59,14 @@ event_menu["$item_menu_information_help"]="run_menu ${item_menu_help_all[@]}"
 event_menu["$item_menu_help_papki"]="info_shared_papki"
 event_menu["$item_menu_help_printer"]="info_install_printer"
 
-#---------------init event for item_menu_network_folders="Сетевые папки" menu-------------------------------
-source $path/event_item_menu_network_folders.sh
-
 #---------------init event for item_menu_information_install="Установка программ" menu-------------------------------
 source $path/event_item_menu_information_install.sh
 
 #---------------init event for item_menu_information_remove="Удаление программ" menu-------------------------------
 source $path/event_item_menu_information_remove.sh
 
-#---------------init event for item_menu_information_repo="настройка рабочего стола" menu-------------------------------
-source $path/event_item_menu_information_desktop.sh
-
 #---------------init event for item_menu_information_repo="Добавить сетевые репозитории" menu-------------------------------
 source $path/event_item_menu_information_repo.sh
-
-#---------------init event for event_item_menu_information_do="меню действия" menu-------------------------------
-source $path/event_item_menu_information_do.sh
 
 #---------------init for item_menu_information_printers="Драйвера для принтеров" menu-------------------------------
 event_menu["$item_menu_information_printers"]="run_menu ${item_menu_firmi_printers[@]}"
@@ -108,20 +84,11 @@ source $path/event_item_menu_firma_Kyocera_models.sh
 #---------------init event for item_menu_information_freeipa="Домен" menu-------------------------------
 source $path/event_item_menu_information_freeipa.sh
 
-#---------------init event for item_menu_information_fonts = шрифты menu-------------------------------
-source $path/event_item_menu_information_fonts.sh
-
 #---------------init event for item_menu_information_update Обновление системы-------------------------------
 event_menu["$item_menu_information_update"]="system_update"
 
 #---------------init event for item_menu_information_pomogator обновление помогатора-------------------------------
 source $path/event_item_menu_information_pomogator.sh
-
-#---------------init menu event for item_menu_information_author="Связь с автором и пожелания" menu------------------
-source $path/event_item_menu_information_author.sh
-
-#---------------init menu event for item_menu_information_terminal="Цветной терминал" menu------------------
-event_menu["$item_menu_information_terminal"]="terminal"
 
 #---------------init menu event for item_menu_information_help="Что делать, если не работает?" menu------------------
 info_install_printer(){
@@ -151,67 +118,6 @@ check_cancel(){
 }
 
 #-------------------------------------all function------------------------------------#
-
-filecore(){
-    #для того чтобы добавить заранее готовые пути до сетевых папок чтобы добавлять их по нажатию 1 кнопки необходимо:
-    #1. в файле event_item_menu_network_folders.sh добавить event_menu["$item_menu_share_folder"]="filecore"
-    #2. item_menu_share_folder можно заменить на ваше значени в файле item_menu_network_folders.sh
-    #3. filecore нужно заменить на функцию которую вы указали в main.sh
-    check_head_shared
-    #Вы можете самостоятельно здесь указать путь до вашего сервера с общими папками
-    server=server.domain.ru/shared_folder
-    local n=1
-    while true; do
-        number=$(grep "$n" "/home/$USER/.config/rusbitech/fly-fm-vfs.conf")
-        if [[ "$number" == "" ]]; then
-            break;
-        fi
-        n=$(($n+1))
-    done
-    #тут проверяется существует ли папка выбранная из меню уже у пользователя. 
-
-    local check=$(grep "$selected_item_menu" "/home/$USER/.config/rusbitech/fly-fm-vfs.conf")
-    echo $check
-    if [[ "$check" == "" ]]; then
-        echo "[Network Place $n]
-        Name=$selected_item_menu
-        Url=smb://$server/$selected_item_menu" >> /home/$USER/.config/rusbitech/fly-fm-vfs.conf
-    fi
-    killall fly-vfs-service fly-fops-service fly-open-service fly-fm-service
-}
-
-share_folder(){
-    check_head_shared
-    name_folder=$(zenity --entry --text "Введите имя для сетевой папки на английском языке" --height=150 --width=300)
-    check_cancel
-    folder=$(zenity --entry --text "Введите полный путь до сетевой папки. smb://server/share/folder" --height=250 --width=400)
-    check_cancel
-    local n=1
-    while true; do
-        number=$(grep "$n" "/home/$USER/.config/rusbitech/fly-fm-vfs.conf")
-        echo $number
-        if [[ "$number" == "" ]]; then
-            break;
-        fi
-        n=$(($n+1))
-    done
-    local check=$(grep "$selected_item_menu" "/home/$USER/.config/rusbitech/fly-fm-vfs.conf")
-    echo $check
-    if [[ "$check" == "" ]]; then
-        echo "[Network Place $n]
-        Name=$name_folder
-        Url=$folder" >> /home/$USER/.config/rusbitech/fly-fm-vfs.conf
-    fi
-    killall fly-vfs-service fly-fops-service fly-open-service fly-fm-service   
-}
-
-remove_share_folder(){
-    remove_name_folder=$(zenity --entry --text "Введите имя для сетевой папки, которую хотите удалить. Имя указано в пункте 'Добавить сетевую папку' " --height=150 --width=300)
-    check_cancel
-    sed "/$remove_name_folder/d" /home/$USER/.config/rusbitech/fly-fm-vfs.conf > /home/$USER/.config/test
-    mv /home/$USER/.config/test /home/$USER/.config/rusbitech/fly-fm-vfs.conf
-    killall fly-vfs-service fly-fops-service fly-open-service fly-fm-service      
-}
 
 get_drivers() {
     mod_selected_item_menu=$(echo "$selected_item_menu" | sed 's/ /+/g')
@@ -264,69 +170,6 @@ remove_app(){
     local passwd=$(zenity --password)
     check_cancel
     echo $passwd | sudo -S apt remove "$1" -y
-}
-
-#-------------------------------------Управление правами рабочего стола------------------------------------#
-
-desktops(){
-    zenity --question --text="Что Вы хотите сделать?" --ok-label="Разрешить" --cancel-label="Запретить" --height=200 --width=200
-    # Проверяем код возврата zenity
-    if [ $? -eq 0 ]; then
-    # Пользователь выбрал "Разрешить", вызываем функцию запрещения
-    passwd=$(zenity --password)
-    echo $passwd | sudo -S chmod u+w -R /home/*/Desktops/
-    zenity --info --title="Внимание!" --text="Вы разрешили изменять содержимое рабочих столов пользователей" --height=200 --width=200
-    else
-    # Пользователь выбрал "Запретить", вызываем функцию запрета
-    passwd=$(zenity --password)
-    echo $passwd | sudo -S chmod u-w -R /home/*/Desktops/  
-    zenity --info --title="Внимание!" --text="Вы запретили изменять содержимое рабочих столов пользователей" --height=200 --width=200
-    fi
-}
-screen(){
-    zenity --question --text="Что Вы хотите сделать?" --ok-label="Разрешить" --cancel-label="Запретить" --height=200 --width=200
-    # Проверяем код возврата zenity
-    if [ $? -eq 0 ]; then
-    # Пользователь выбрал "Разрешить", вызываем функцию запрещения
-    passwd=$(zenity --password)
-    echo $passwd | sudo -S chmod u+x /usr/bin/fly-admin-screen
-    zenity --info --title="Внимание!" --text="Вы разрешили изменять настройки монитора в пункте меню" --height=200 --width=200
-    else
-    # Пользователь выбрал "Запретить", вызываем функцию запрета
-    passwd=$(zenity --password)
-    echo $passwd | sudo -S chmod u-x /usr/bin/fly-admin-screen  
-    zenity --info --title="Внимание!" --text="Вы запретили изменять настройки монитора в пункте меню" --height=200 --width=200
-    fi
-}
-theme(){
-    zenity --question --text="Что Вы хотите сделать?" --ok-label="Разрешить" --cancel-label="Запретить" --height=200 --width=200
-    # Проверяем код возврата zenity
-    if [ $? -eq 0 ]; then
-    # Пользователь выбрал "Разрешить", вызываем функцию запрещения
-    passwd=$(zenity --password)
-    echo $passwd | sudo -S chmod u+x /usr/bin/fly-admin-theme
-    zenity --info --title="Внимание!" --text="Вы разрешили вкладку свойства в пункте меню" --height=200 --width=200
-    else
-    # Пользователь выбрал "Запретить", вызываем функцию запрета
-    passwd=$(zenity --password)
-    echo $passwd | sudo -S chmod u-x /usr/bin/fly-admin-theme  
-    zenity --info --title="Внимание!" --text="Вы разрешили вкладку свойства в пункте меню" --height=200 --width=200
-    fi
-}
-center(){
-    zenity --question --text="Что Вы хотите сделать?" --ok-label="Разрешить" --cancel-label="Запретить" --height=200 --width=200
-    # Проверяем код возврата zenity
-    if [ $? -eq 0 ]; then
-    # Пользователь выбрал "Разрешить", вызываем функцию запрещения
-    passwd=$(zenity --password)
-    echo $passwd | sudo -S chmod u+x /usr/bin/fly-admin-center
-    zenity --info --title="Внимание!" --text="Вы разрешили входить во вкладку пункт управления в меню пуск" --height=200 --width=200
-    else
-    # Пользователь выбрал "Запретить", вызываем функцию запрета
-    passwd=$(zenity --password)
-    echo $passwd | sudo -S chmod u-x /usr/bin/fly-admin-center 
-    zenity --info --title="Внимание!" --text="Вы запретили входить во вкладку пункт управления в меню пуск" --height=200 --width=200
-    fi
 }
 
 #-------------------------------------domain menu------------------------------------#
@@ -662,31 +505,6 @@ kaspersky(){
    fi
 }
 
-fonts(){
-    passwd=$(zenity --password)
-    check_cancel
-    echo $passwd | sudo -S wget -O /home/$USER/Desktop/debian.deb https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=repo%2Fdebian.deb
-    echo $passwd | sudo -S dpkg -i /home/$USER/Desktop/debian.deb
-    echo $passwd | sudo -S wget -O /etc/apt/sources.list.d/debian.list https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=repo%2Fdebian.list
-    echo $passwd | sudo -S rm /home/$USER/Desktop/debian.deb
-    echo $passwd | sudo -S apt update -y 
-    zenity --progress --pulsate --title="Установка пакета" --text="Подождите, идет установка..." --auto-close &
-    (
-    # Установка пакета с использованием sudo и передачей пароля через stdin
-    echo $passwd | sudo -S apt install ttf-mscorefonts-installer -y -f
-    # Получение кода завершения установки
-    exit_code=$?
-    # Проверка кода завершения и отображение соответствующего сообщения
-        if [ $exit_code -eq 0 ]; then
-            zenity --info --title="Успех" --text="Пакет успешно установлен!"
-        else
-            zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
-        fi
-    ) | zenity --progress --pulsate --auto-close
-    echo $passwd | sudo -S rm /etc/apt/sources.list.d/debian.list
-    echo $passwd | sudo -S apt update -y 
-}
-
 finereader(){
     passwd=$(zenity --password)
     check_cancel
@@ -865,25 +683,6 @@ install_virtualbox(){
     ) | zenity --progress --pulsate --auto-close
 }
 
-terminal(){
-    $(zenity --question --text="Сделать терминал цветным?" --ok-label="Да,включить цвет" --cancel-label="Нет,вернуть стандартный" --height=150 --width=300)
-    if [[ $? -eq 0 ]]; then
-    sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' ~/.bashrc
-    passwd=$(zenity --forms --title="Пароль для администратора" \
-        --text="Введите пароль администратора" \
-        --add-password="Пароль")    
-    echo $passwd | sudo -S sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' /etc/skel/.bashrc
-    $(zenity --info --text="Терминал успешно изменен")
-    else
-    sed -i 's/force_color_prompt=yes/#force_color_prompt=yes/' ~/.bashrc
-    passwd=$(zenity --forms --title="Пароль для администратора" \
-        --text="Введите пароль администратора" \
-        --add-password="Пароль")    
-    echo $passwd | sudo -S sed -i 's/force_color_prompt=yes/#force_color_prompt=yes/' /etc/skel/.bashrc
-    $(zenity --info --text="Терминал успешно изменен на заводские настройки")
-    fi
-}
-
 system_update(){
     passwd=$(zenity --password)
     check_cancel
@@ -1006,31 +805,6 @@ repo_info(){
  \n✔️ Расширенный репозиторий (extended) - Дополнительное ПО" --height=500 --width=500)
 }
 
-#-------------------------------------меню действия function------------------------------------#
-print(){
-    passwd=$(zenity --forms --title="Пароль для администратора" \
-        --text="Введите пароль администратора" \
-        --add-password="Пароль")  
-    echo $passwd | sudo -S wget -O /usr/share/flyfm/actions/print.desktop https://gitflic.ru/project/gabidullin-aleks/menyu-dejstviya-astra-linux/blob/raw?file=print%2Fprint.desktop
-    $(zenity --info --text="Действие успешно добавлено, необходимо перезайти из сессии пользователя!" --height=200 --width=300)
-}
-link(){
-    passwd=$(zenity --forms --title="Пароль для администратора" \
-        --text="Введите пароль администратора" \
-        --add-password="Пароль")    
-    echo $passwd | sudo -S wget -O /usr/share/pixmaps/link.png https://gitflic.ru/project/gabidullin-aleks/menyu-dejstviya-astra-linux/blob/raw?file=link%2Flink.png
-    echo $passwd | sudo -S wget -O /usr/share/flyfm/actions/link.desktop https://gitflic.ru/project/gabidullin-aleks/menyu-dejstviya-astra-linux/blob/raw?file=link%2Flink.desktop
-    $(zenity --info --text="Действие успешно добавлено, необходимо перезайти из сессии пользователя!" --height=200 --width=300)
-}
-sudo_open(){
-    passwd=$(zenity --forms --title="Пароль для администратора" \
-        --text="Введите пароль администратора" \
-        --add-password="Пароль")  
-    echo $passwd | sudo -S wget -O /usr/share/flyfm/actions/sudo.desktop https://gitflic.ru/project/gabidullin-aleks/menyu-dejstviya-astra-linux/blob/raw?file=sudo%2Fsudo.desktop
-    echo $passwd | sudo -S wget -O /usr/share/pixmaps/sudo.png https://gitflic.ru/project/gabidullin-aleks/menyu-dejstviya-astra-linux/blob/raw?file=sudo%2Fsudo.png
-    $(zenity --info --text="Действие успешно добавлено, необходимо перезайти из сессии пользователя!" --height=200 --width=300)
-}
-share(){
     passwd=$(zenity --forms --title="Пароль для администратора" \
         --text="Введите пароль администратора" \
         --add-password="Пароль") 
