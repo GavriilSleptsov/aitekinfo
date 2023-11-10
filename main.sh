@@ -627,35 +627,6 @@ dinfo_22(){
        
 }
 
-#consultant(){
-#    passwd=$(zenity --password)
-#    check_cancel
-#    (
-#    echo $passwd | sudo -S apt install wine -y
-#    echo $passwd | sudo -S mkdir /mnt/cons
-#   echo $passwd | sudo -S chmod -R 0777 /mnt/cons
-#    echo $passwd | sudo -S apt install cifs-utils -y
-#    #необходимо указать сетевую папку где установлен консультант ( ниже пример )
-#    echo $passwd | sudo -S sh -c 'echo "//10.10.80.43/cp /mnt/cons cifs guest,file_mode=0777,dir_mode=0777,iocharset=utf8 0 0" >> /etc/fstab'
- #   echo $passwd | sudo -S mount -a  
- #     тут скачивается бутылка консультанта, которая заранее была установленна на пк, и далее распространяется уже готовым образом без установки
- #   echo $passwd | sudo -S wget http://ip/share/ConsultantPlus.tar.gz -P /opt/
- #   echo $passwd | sudo -S tar -xzf /opt/ConsultantPlus.tar.gz -C /opt/
- #   echo $passwd | sudo -S rm /opt/ConsultantPlus.tar.gz
- #   echo $passwd | sudo -S chmod -R 0777 /opt/.ConsultantPlus
- #   echo $passwd | sudo -S wget -O /opt/cons.sh https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=desktop+and+icons%2Fcons.sh
- #   echo $passwd | sudo -S chmod +x /opt/cons.sh
- #   echo $passwd | sudo -S wget -O /etc/xdg/autostart/cons.desktop https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=desktop+and+icons%2Fcons.desktop 
- #   exit_code=$?
- #   # Проверка кода завершения и отображение соответствующего сообщения
- #       if [ $exit_code -eq 0 ]; then
- #           zenity --info --title="Успех" --text="Пакет успешно установлен!"
- #       else
- #           zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
- #       fi
- #   ) | zenity --progress --pulsate --auto-close
-#}
-
 install_virtualbox(){
     passwd=$(zenity --password)
     check_cancel
@@ -793,16 +764,6 @@ repo_info(){
  \n✔️ Базовый репозиторий (base) - включает в себя репозиторий main , update и компаненты разработчика (dev) с обновлениями (dev-update)
  \n✔️ Расширенный репозиторий (extended) - Дополнительное ПО" --height=500 --width=500)
 }
-
-    passwd=$(zenity --forms --title="Пароль для администратора" \
-        --text="Введите пароль администратора" \
-        --add-password="Пароль") 
-    echo $passwd | sudo -S wget -O /usr/share/pixmaps/share.png https://gitflic.ru/project/gabidullin-aleks/menyu-dejstviya-astra-linux/blob/raw?file=share%2Fshare.png
-    echo $passwd | sudo -S wget -O /opt/share.sh https://gitflic.ru/project/gabidullin-aleks/menyu-dejstviya-astra-linux/blob/raw?file=share%2Fshare.sh
-    echo $passwd | sudo -S chmod +x /opt/share.sh
-    echo $passwd | sudo -S wget -O /usr/share/flyfm/actions/share.desktop https://gitflic.ru/project/gabidullin-aleks/menyu-dejstviya-astra-linux/blob/raw?file=share%2Fshare.desktop 
-    $(zenity --info --text="Действие успешно добавлено, необходимо перезайти из сессии пользователя!" --height=200 --width=300)
-}
 #-------------------------------------pomogator settings function------------------------------------#
 pomogator_update(){
     check_cancel
@@ -821,7 +782,7 @@ pomogator_update(){
         else
             zenity --error --title="Ошибка" --text="Ошибка при установке обнавления."
         fi
-        FOLDER_PATH=/opt/helper/
+        FOLDER_PATH=/opt/aitekinfo/
         # Замените файлы в целевой папке
         echo $passwd | sudo -S cp -R "$tmp_folder"/* "$FOLDER_PATH"
 
