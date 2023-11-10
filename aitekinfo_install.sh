@@ -1,7 +1,7 @@
 #!/bin/bash
 if dpkg -s git  &>/dev/null; then
    if dpkg -s curl  &>/dev/null; then
-    $(zenity --info --text "Вас приветствует программа установки приложения Помогатор Astra Linux! В следующем окошке введите пароль от администратора!" --height=150 --width=300)
+    $(zenity --info --text "Вас приветствует программа установки приложения АйтекИнфо! В следующем окошке введите пароль от администратора!" --height=150 --width=300)
     passwd=$(zenity --forms --title="Пароль для администратора" \
             --text="Введите пароль администратора" \
             --add-password="Пароль")
@@ -16,7 +16,7 @@ if dpkg -s git  &>/dev/null; then
         exit_code=$?
             # Проверка кода завершения и отображение соответствующего сообщения
             if [ $exit_code -eq 0 ]; then
-                $(zenity --info --title="Успех" --text="Приложение Помогатор Astra Linux успешно установлено!" --height=150 --width=300)
+                $(zenity --info --title="Успех" --text="Приложение АйтекИнфо успешно установлено!" --height=150 --width=300)
             else
                 zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
             fi
