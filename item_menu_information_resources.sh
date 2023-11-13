@@ -7,5 +7,7 @@ export items_resources=(
 "\"$item_menu_astra\""
 "\"$item_menu_aitekinfo_site\"" 
 "\"$item_menu_instruction_myoffice_text\""
+"\"$item_menu_instruction_myoffice_table\""
+"\"$item_menu_instruction_myoffice_presentation\""
 "\"$exit_menu\"" 
 "\"$exit_app\"" )
