@@ -681,30 +681,22 @@ system_update(){
 }
 
 #-------------------------------------repo function------------------------------------#
-repo_stable1_6(){
+repo_rcit(){
     passwd=$(zenity --forms --title="Пароль для администратора" \
         --text="Введите пароль администратора" \
         --add-password="Пароль")
     check_cancel    
-    echo $passwd | sudo -S bash -c "echo -e 'deb https://dl.astralinux.ru/astra/stable/1.6_x86-64/repository smolensk main contrib non-free' > /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb https://dl.astralinux.ru/astra/stable/1.6_x86-64/repository-update smolensk main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb https://dl.astralinux.ru/astra/stable/1.6_x86-64/repository-dev smolensk main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb https://dl.astralinux.ru/astra/stable/1.6_x86-64/repository-dev-update smolensk main contrib non-free' >> /etc/apt/sources.list"
+    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://10.50.1.53/repo/repository-main/     1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
+	echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://10.50.1.53/repo/repository-update/   1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
+	echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://10.50.1.53/repo/repository-base/     1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
+	echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://10.50.1.53/repo/repository-extended/ 1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
+	echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://10.50.1.53/repo/repository-extended/ 1.7_x86-64 astra-ce' >> /etc/apt/sources.list"
+	echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://10.50.1.53/repo/repository-main/     1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
+	echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://10.50.1.53/astraad ./' >> /etc/apt/sources.list"
     echo $passwd | sudo -S apt update
-    $(zenity --info --text="Репозиторий успешно добавлен. Можно проверить по пути /etc/apt/sources.list" --height=200 --width=300)
+    $(zenity --info --text="Репозитории РЦИТ успешно добавлены. Можно проверить по пути /etc/apt/sources.list" --height=200 --width=300)
 }
-repo_frozen1_6_12(){
-    passwd=$(zenity --forms --title="Пароль для администратора" \
-        --text="Введите пароль администратора" \
-        --add-password="Пароль")
-    check_cancel    
-    echo $passwd | sudo -S bash -c "echo -e 'deb https://dl.astralinux.ru/astra/frozen/1.6_x86-64/1.6.12/repository smolensk main contrib non-free' > /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb https://dl.astralinux.ru/astra/frozen/1.6_x86-64/1.6.12/repository-update/ smolensk main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb https://dl.astralinux.ru/astra/frozen/1.6_x86-64/1.6.12/repository-dev/ smolensk main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb https://dl.astralinux.ru/astra/frozen/1.6_x86-64/1.6.12/repository-dev-update/ smolensk main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S apt update
-    $(zenity --info --text="Репозиторий успешно добавлен. Можно проверить по пути /etc/apt/sources.list" --height=200 --width=300)
-}
+
 repo_stable1_7(){
     passwd=$(zenity --forms --title="Пароль для администратора" \
         --text="Введите пароль администратора" \
@@ -730,33 +722,8 @@ repo_frozen1_7(){
     echo $passwd | sudo -S apt update
     $(zenity --info --text="Репозиторий успешно добавлен. Можно проверить по пути /etc/apt/sources.list" --height=200 --width=300)
 }
-repo_debian(){
-    passwd=$(zenity --forms --title="Пароль для администратора" \
-        --text="Введите пароль администратора" \
-        --add-password="Пароль")    
-    check_cancel
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://mirror.yandex.ru/debian/ buster main contrib non-free' > /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://mirror.yandex.ru/debian/ buster-updates main contrib non-free ' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://mirror.yandex.ru/debian-security/ buster/updates main contrib non-free ' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S apt update
-    $(zenity --info --text="Репозиторий успешно добавлен. Можно проверить по пути /etc/apt/sources.list" --height=200 --width=300)
-}
-repo_stable_debian(){
-    passwd=$(zenity --forms --title="Пароль для администратора" \
-        --text="Введите пароль администратора" \
-        --add-password="Пароль")    
-    check_cancel
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] https://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-base/ 1.7_x86-64 main contrib non-free' > /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] https://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-main/ 1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] https://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-update/ 1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] https://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] https://dl.astralinux.ru/astra/stable/1.7_x86-64/uu/last/repository-base 1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"   
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://mirror.yandex.ru/debian/ buster main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://mirror.yandex.ru/debian/ buster-updates main contrib non-free ' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://mirror.yandex.ru/debian-security/ buster/updates main contrib non-free ' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S apt update
-    $(zenity --info --text="Репозиторий успешно добавлен. Можно проверить по пути /etc/apt/sources.list" --height=200 --width=300)
-}
+
+
 repo_info(){
     $(zenity --info --text=" Описание веток репозиториев
  \n✔️ Основной репозиторий (main) - сертифициронный установочный диск
