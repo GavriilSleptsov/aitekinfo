@@ -919,7 +919,7 @@ run_menu(){
 }
 
 run_app() {
-    $(zenity --info --text="$app_info" --height=150 --width=200)
+    $(zenity --info --text="$app_info" --height=150 --width=250)
     check_update
     run_menu "${items_main_menu[@]}"
 }
