@@ -830,7 +830,7 @@ check_update(){
                             fi
                         fi
                         else
-                            $(zenity --info --text="У вас установленно актуальное обновление "$version_now".\nСпасибо что используете наши технологии" --height=150 --width=300)
+                            $(zenity --info --text="У вас установлено актуальное обновление "$version_now".\nСпасибо что используете наши технологии" --height=150 --width=300)
                         fi
                     fi
     else
