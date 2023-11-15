@@ -812,7 +812,7 @@ pomogator_version(){
 
 #-------------------------------------main function------------------------------------#
 check_update(){
-    if dpkg -s git  &>/dev/null; then
+     if dpkg -s git  &>/dev/null; then
         if dpkg -s curl  &>/dev/null; then
             version=$(curl "https://gitflic.ru/project/gabidullin-aleks/pomogator/blob/raw?file=version.sh&inline=false")
             trimmed_version=$(echo "$version" | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
@@ -823,9 +823,12 @@ check_update(){
                         $(zenity --info --text="Вышло обновление приложения "$trimmed_version".\nСпасибо что используете наши технологии" --height=150 --width=300)
                         $(zenity --question --text="Хотите посмотреть новвоведения?" --ok-label="Да" --cancel-label="Нет" --height=150 --width=300)
                         if [[ $? -eq 0 ]]; then
-                        newss=$(curl "https://gitflic.ru/project/gabidullin-aleks/pomogator/blob/raw?file=news&inline=false")
-                        $(zenity --info --text="$newss" --height=400 --width=700)
-    
+                            newss=$(curl "https://gitflic.ru/project/gabidullin-aleks/pomogator/blob/raw?file=news&inline=false")
+                            $(zenity --question  --title="Новости и обновления?" --text="$newss.\nХотите обновить приложение?" --ok-label="Обновить" --cancel-label="Не обновлять" --height=400 --width=700)
+                            if [[ $? -eq 0 ]]; then
+                            pomogator_update
+                            fi
+                        fi
                         else
                             $(zenity --info --text="У вас установленно актуальное обновление "$version_now".\nСпасибо что используете наши технологии" --height=150 --width=300)
                         fi
@@ -884,7 +887,7 @@ check_update(){
             exit 0
         fi
     fi
-    
+     
 }
 
 run_event() {    
