@@ -727,7 +727,6 @@ repo_frozen1_7_3(){
     $(zenity --info --text="Репозитории frozen 1.7.3 успешно добавлены. Можно проверить по пути /etc/apt/sources.list" --height=200 --width=300)
 }
 
-
 repo_info(){
     $(zenity --info --text=" Описание веток репозиториев
  \n✔️ Основной репозиторий (main) - сертифициронный установочный диск
@@ -745,7 +744,7 @@ pomogator_update(){
         zenity --progress --pulsate --title="Обновление программы" --text="Подождите, идет установка..." --auto-close &
         (
         tmp_folder=$(mktemp -d)
-        echo $passwd | sudo -S git clone --depth=1 "https://gitflic.ru/project/gabidullin-aleks/pomogator.git" "$tmp_folder"
+        echo $passwd | sudo -S git clone --depth=1 "https://github.com/GavriilSleptsov/aitekinfo.git" "$tmp_folder"
         exit_code=$?
         # Проверка кода завершения и отображение соответствующего сообщения
         if [ $exit_code -eq 0 ]; then
@@ -785,13 +784,13 @@ pomogator_update(){
 }
 
 pomogator_news(){
-    news=$(curl "https://gitflic.ru/project/gabidullin-aleks/pomogator/blob/raw?file=news&inline=false")
+    news=$(curl "https://raw.githubusercontent.com/GavriilSleptsov/aitekinfo/main/news")
     $(zenity --info --text="Вышло обновление приложения $news " --height=400 --width=700)
 
 }
 
 pomogator_version(){
-    version=$(curl "https://gitflic.ru/project/gabidullin-aleks/pomogator/blob/raw?file=version.sh&inline=false")
+    version=$(curl "https://raw.githubusercontent.com/GavriilSleptsov/aitekinfo/main/version.sh")
     trimmed_version=$(echo "$version" | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
     if [[ $version == *html* ]]; then
     $(zenity --info --text=" У вас нет доступа к репозиторию для обновления" --height=150 --width=300)
@@ -800,7 +799,7 @@ pomogator_version(){
             $(zenity --info --text="Вышло обновление "$trimmed_version".\nСпасибо что используете наши технологии" --height=150 --width=300)
             $(zenity --question --text="Хотите посмотреть новвоведения?" --ok-label="Да" --cancel-label="Нет" --height=150 --width=300)
                 if [[ $? -eq 0 ]]; then
-                newss=$(curl "https://gitflic.ru/project/gabidullin-aleks/pomogator/blob/raw?file=news&inline=false")
+                newss=$(curl "https://raw.githubusercontent.com/GavriilSleptsov/aitekinfo/main/news")
                 $(zenity --info --text="$newss" --height=400 --width=700)
                 fi
             else
