@@ -814,7 +814,7 @@ pomogator_version(){
 check_update(){
     if dpkg -s git  &>/dev/null; then
         if dpkg -s curl  &>/dev/null; then
-            version=$(curl "https://gitflic.ru/project/gabidullin-aleks/pomogator/blob/raw?file=version.sh&inline=false")
+            version=$(curl "https://raw.githubusercontent.com/GavriilSleptsov/aitekinfo/main/version.sh")
             trimmed_version=$(echo "$version" | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
                 if [[ $version == *html* ]]; then
                 $(zenity --info --text=" У вас нет доступа к репозиторию для обновления" --height=150 --width=300)
@@ -825,7 +825,7 @@ check_update(){
                         if [[ $? -eq 0 ]]; then
                         newss=$(curl "https://gitflic.ru/project/gabidullin-aleks/pomogator/blob/raw?file=news&inline=false")
                         $(zenity --info --text="$newss" --height=400 --width=700)
-                        fi
+    
                         else
                             $(zenity --info --text="У вас установленно актуальное обновление "$version_now".\nСпасибо что используете наши технологии" --height=150 --width=300)
                         fi
