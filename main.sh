@@ -681,11 +681,14 @@ system_update(){
 }
 
 #-------------------------------------repo function------------------------------------#
+
+#---------- СЕТЕВЫЕ РЕПОЗИТОРИИ РЦИТ ----------#
 repo_rcit(){
     passwd=$(zenity --forms --title="Пароль для администратора" \
         --text="Введите пароль администратора" \
         --add-password="Пароль")
     check_cancel    
+	echo $passwd | sudo -S bash -c "#---------- Сетевые репозитории РЦИТ ----------"
     echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://10.50.1.53/repo/repository-main/     1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
 	echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://10.50.1.53/repo/repository-update/   1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
 	echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] http://10.50.1.53/repo/repository-base/     1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
