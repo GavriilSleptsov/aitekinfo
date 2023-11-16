@@ -2,6 +2,7 @@
 ##########----------"Глобальные переменные"----------##########
 path=/opt/aitekinfo
 path_items=/opt/aitekinfo/item_menu
+path_events=/opt/aitekinfo/event_item_menu
 source $path/version.sh
 source $path/date_last_update.sh
 exit_app="Выход"
@@ -65,10 +66,10 @@ event_menu["$exit_app"]="exit 1"
 ###########################################################################################
 
 ##########----------"Информационные ресурсы"----------##########
-source $path/event_item_menu_information_resources.sh
+source $path_events/event_item_menu_information_resources.sh
 
 ##########----------"Инструкции"----------##########
-source $path/event_item_menu_information_instruction.sh
+source $path_events/event_item_menu_information_instruction.sh
 
 ##########----------"Что делать, если не работает?"----------##########
 event_menu["$item_menu_information_help"]="run_menu ${item_menu_help_all[@]}"
@@ -76,13 +77,13 @@ event_menu["$item_menu_help_papki"]="info_shared_papki"
 event_menu["$item_menu_help_printer"]="info_install_printer"
 
 ##########----------"Установка программ"----------##########
-source $path/event_item_menu_information_install.sh
+source $path_events/event_item_menu_information_install.sh
 
 ##########----------"Удаление программ"----------##########
-source $path/event_item_menu_information_remove.sh
+source $path_events/event_item_menu_information_remove.sh
 
 ##########----------"Добавить сетевые репозитории"----------##########
-source $path/event_item_menu_information_repo.sh
+source $path_events/event_item_menu_information_repo.sh
 
 ##########----------"Драйвера для принтеров"----------##########
 event_menu["$item_menu_information_printers"]="run_menu ${item_menu_firmi_printers[@]}"
@@ -95,16 +96,16 @@ event_menu["$item_menu_firma_Kyocera"]="run_menu ${item_menu_firma_Kyocera_model
 event_menu["$item_driver_Samsung_ML_2851ND"]="get_drivers"
 
 #-------------init menu event for item_menu_firma_Kyocera_models Фирма=Киосера-----------------------
-source $path/event_item_menu_firma_Kyocera_models.sh
+source $path_events/event_item_menu_firma_Kyocera_models.sh
 
 ##########----------"Действия с FreeIpa"----------##########
-source $path/event_item_menu_information_freeipa.sh
+source $path_events/event_item_menu_information_freeipa.sh
 
 ##########----------"Обновление системы"----------##########
 event_menu["$item_menu_information_update"]="system_update"
 
 ##########----------"Драйвера для принтеров"----------##########
-source $path/event_item_menu_information_pomogator.sh
+source $path_events/event_item_menu_information_pomogator.sh
 
 ###########################################################################################
 ############################## КОНЕЦ БЛОКА event_item_menu ################################
