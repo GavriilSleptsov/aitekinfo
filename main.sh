@@ -1,5 +1,5 @@
 #!/bin/bash
-#---------------init core config-------------------------------------
+##########----------"Глобальные переменные"----------##########
 path=/opt/aitekinfo
 source $path/version.sh
 source $path/date_last_update.sh
@@ -9,28 +9,33 @@ selected_item_menu=""
 app_info="Программа помощник: Помогатор АйтекИнфо\n\nВерсия: "$version_now"\n\nДата последнего обновления: "$date_last_update"\n"
 crypto="Для работы с сайтами использующими ЭЦП для подтверждения входа необходимо устанвить Яндекс браузер!" 
 papki="1.Необходимо перезайти в сессию.\n2. Перезагрузить ПК.\n3. Зайти в учетную запись имяпользователя@domain.name и пароль от windows прошлый ( если пароль устарел сменить его на новый)"
-#---------------init items_main_menu-------------------------------
+
+####################################################################################
+############################## НАЧАЛО БЛОКА item_menu ##############################
+####################################################################################
+
+##########----------"Главное меню"----------##########
 source $path/items_main_menu.sh
 
-#---------------init for item_menu_information_resources_of="Информационные ресурсы СГЭУ"-------------------------------
+##########----------"Информационные ресурсы"----------##########
 source $path/item_menu_information_resources.sh
 
-#---------------init item_menu_information_instructions="Инструкции "-------------------------------
+##########----------"Инструкции"----------##########
 source $path/item_menu_information_instructions.sh
 
-#---------------item_menu_information_help="Что делать, если не работает?"-------------------------------
+##########----------"Что делать, если не работает?"----------##########
 source $path/item_menu_information_help.sh
 
-#---------------init for item_menu_information_install="Установка программ" menu-------------------------------
+##########----------"Установка программ"----------##########
 source $path/item_menu_information_install.sh
 
-#---------------init for item_menu_information_remove="Удаление программ" menu-------------------------------
+##########----------"Удаление программ"----------##########
 source $path/item_menu_remove_apps.sh
 
-#---------------init for item_menu_information_repo="Добавить сетевые репозитории" menu-------------------------------
+##########----------"Добавить сетевые репозитори"----------##########
 source $path/item_menu_information_repo.sh
 
-#---------------init for item_menu_information_printers="Драйвера для принтеров" menu-------------------------------
+##########----------"Драйвера для принтеров"----------##########
 source $path/item_menu_information_printers.sh
 
 #---------------init for item_menu_firma_samsung_models menu-------------------------------
@@ -38,41 +43,50 @@ item_driver_Samsung_ML_2851ND="Samsung-ML-2851ND"
 item_menu_govno_printer="printer"
 item_menu_firma_Samsung_models=("\"$item_driver_Samsung_ML_2851ND\"" "\"$item_menu_govno_printer\"" "\"$item_menu_govno_printer\"" "\"$item_menu_govno_printer\"" "\"$item_menu_govno_printer\"" "\"$exit_menu\"" "\"$exit_app\"")
 
-#---------------init for item_menu_firma_Kyocera_models menu-------------------------------
+##########----------"Модель принтера Kyocera"----------##########
 source $path/item_menu_firma_Kyocera_models.sh
 
-#---------------init for item_menu_information_pomogator="Обновление и нововведения" menu-------------------------------
+##########----------"Обновление и новвоведения"----------##########
 source $path/item_menu_information_pomogator.sh
 
+##########----------"Действия с Freeipa"----------##########
 source $path/item_menu_information_freeipa.sh
-#-------------init menu event-----------------------
+
+####################################################################################
+############################## КОНЕЦ БЛОКА item_menu ###############################
+####################################################################################
+
 declare -A event_menu
 event_menu["$exit_app"]="exit 1"
 
-#-------------init event for item_menu_information_resources="Информационные ресурсы СГЭУ"-----------------------
+###########################################################################################
+############################## НАЧАЛО БЛОКА event_item_menu ###############################
+###########################################################################################
+
+##########----------"Информационные ресурсы"----------##########
 source $path/event_item_menu_information_resources.sh
 
-#-------------init event for item_menu_information_instructions="Инструкции СГЭУ"-----------------------
+##########----------"Инструкции"----------##########
 source $path/event_item_menu_information_instruction.sh
 
-#---------------init event for item_menu_information_help="Что делать, если не работает?"-------------------------------
+##########----------"Что делать, если не работает?"----------##########
 event_menu["$item_menu_information_help"]="run_menu ${item_menu_help_all[@]}"
 event_menu["$item_menu_help_papki"]="info_shared_papki"
 event_menu["$item_menu_help_printer"]="info_install_printer"
 
-#---------------init event for item_menu_information_install="Установка программ" menu-------------------------------
+##########----------"Установка программ"----------##########
 source $path/event_item_menu_information_install.sh
 
-#---------------init event for item_menu_information_remove="Удаление программ" menu-------------------------------
+##########----------"Удаление программ"----------##########
 source $path/event_item_menu_information_remove.sh
 
-#---------------init event for item_menu_information_repo="Добавить сетевые репозитории" menu-------------------------------
+##########----------"Добавить сетевые репозитории"----------##########
 source $path/event_item_menu_information_repo.sh
 
-#---------------init for item_menu_information_printers="Драйвера для принтеров" menu-------------------------------
+##########----------"Драйвера для принтеров"----------##########
 event_menu["$item_menu_information_printers"]="run_menu ${item_menu_firmi_printers[@]}"
 
-#-------------init menu event for item_menu_firmi_printers Фирмы принтеров-----------------------
+##########----------"Фирмы принтеров"----------##########
 event_menu["$item_menu_firma_Samsung"]="run_menu ${item_menu_firma_Samsung_models[@]}"
 event_menu["$item_menu_firma_Kyocera"]="run_menu ${item_menu_firma_Kyocera_models[@]}"
 
@@ -82,16 +96,19 @@ event_menu["$item_driver_Samsung_ML_2851ND"]="get_drivers"
 #-------------init menu event for item_menu_firma_Kyocera_models Фирма=Киосера-----------------------
 source $path/event_item_menu_firma_Kyocera_models.sh
 
-#---------------init event for item_menu_information_freeipa="Домен" menu-------------------------------
+##########----------"Действия с FreeIpa"----------##########
 source $path/event_item_menu_information_freeipa.sh
 
-#---------------init event for item_menu_information_update Обновление системы-------------------------------
+##########----------"Обновление системы"----------##########
 event_menu["$item_menu_information_update"]="system_update"
 
-#---------------init event for item_menu_information_pomogator обновление помогатора-------------------------------
+##########----------"Драйвера для принтеров"----------##########
 source $path/event_item_menu_information_pomogator.sh
 
-#---------------init menu event for item_menu_information_help="Что делать, если не работает?" menu------------------
+###########################################################################################
+############################## КОНЕЦ БЛОКА event_item_menu ################################
+###########################################################################################
+
 info_install_printer(){
     $(zenity --info --text="Чтобы добавить принтер необходимо перейти от имени пользователя, которому добавляем принтер:\n Пуск -> Панель управления -> Оборудование -> Принтеры -> Нажать правой кнопкой мышки на принтер -> добавить принтер и ищем нужный принтер.\n Скачать необходимые драйвера можно во вкладке 'Драйвера для принтера' в данном приложение." --height=250 --width=350)
 }
@@ -727,7 +744,6 @@ repo_frozen1_7_3(){
     echo $passwd | sudo -S apt update
     $(zenity --info --text="Репозитории frozen 1.7.3 успешно добавлены. Можно проверить по пути /etc/apt/sources.list" --height=200 --width=300)
 }
-
 repo_info(){
     $(zenity --info --text=" Описание веток репозиториев
  \n✔️ Основной репозиторий (main) - сертифициронный установочный диск
