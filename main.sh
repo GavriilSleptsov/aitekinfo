@@ -1,6 +1,7 @@
 #!/bin/bash
 ##########----------"Глобальные переменные"----------##########
 path=/opt/aitekinfo
+path_items=/opt/aitekinfo/item_menu
 source $path/version.sh
 source $path/date_last_update.sh
 exit_app="Выход"
@@ -15,28 +16,28 @@ papki="1.Необходимо перезайти в сессию.\n2. Перез
 ####################################################################################
 
 ##########----------"Главное меню"----------##########
-source $path/items_main_menu.sh
+source $path_items/items_main_menu.sh
 
 ##########----------"Информационные ресурсы"----------##########
-source $path/item_menu_information_resources.sh
+source $path_items/item_menu_information_resources.sh
 
 ##########----------"Инструкции"----------##########
-source $path/item_menu_information_instructions.sh
+source $path_items/item_menu_information_instructions.sh
 
 ##########----------"Что делать, если не работает?"----------##########
-source $path/item_menu_information_help.sh
+source $path_items/item_menu_information_help.sh
 
 ##########----------"Установка программ"----------##########
-source $path/item_menu_information_install.sh
+source $path_items/item_menu_information_install.sh
 
 ##########----------"Удаление программ"----------##########
-source $path/item_menu_remove_apps.sh
+source $path_items/item_menu_remove_apps.sh
 
 ##########----------"Добавить сетевые репозитори"----------##########
-source $path/item_menu_information_repo.sh
+source $path_items/item_menu_information_repo.sh
 
 ##########----------"Драйвера для принтеров"----------##########
-source $path/item_menu_information_printers.sh
+source $path_items/item_menu_information_printers.sh
 
 #---------------init for item_menu_firma_samsung_models menu-------------------------------
 item_driver_Samsung_ML_2851ND="Samsung-ML-2851ND"
@@ -44,13 +45,13 @@ item_menu_govno_printer="printer"
 item_menu_firma_Samsung_models=("\"$item_driver_Samsung_ML_2851ND\"" "\"$item_menu_govno_printer\"" "\"$item_menu_govno_printer\"" "\"$item_menu_govno_printer\"" "\"$item_menu_govno_printer\"" "\"$exit_menu\"" "\"$exit_app\"")
 
 ##########----------"Модель принтера Kyocera"----------##########
-source $path/item_menu_firma_Kyocera_models.sh
+source $path_items/item_menu_firma_Kyocera_models.sh
 
 ##########----------"Обновление и новвоведения"----------##########
-source $path/item_menu_information_pomogator.sh
+source $path_items/item_menu_information_pomogator.sh
 
 ##########----------"Действия с Freeipa"----------##########
-source $path/item_menu_information_freeipa.sh
+source $path_items/item_menu_information_freeipa.sh
 
 ####################################################################################
 ############################## КОНЕЦ БЛОКА item_menu ###############################
@@ -117,7 +118,7 @@ info_shared_papki() {
     $(zenity --info --text="$papki" --height=200 --width=300)
 }
 
-#-------------------------------------check function------------------------------------#
+##########----------"Check функции"----------##########
 
 check_head_shared(){
     check_head=$(grep "Archives" "/home/$USER/.config/rusbitech/fly-fm-vfs.conf")
@@ -135,7 +136,7 @@ check_cancel(){
         fi
 }
 
-#-------------------------------------all function------------------------------------#
+##########----------"Функции"----------##########
 
 get_drivers() {
     mod_selected_item_menu=$(echo "$selected_item_menu" | sed 's/ /+/g')
@@ -700,7 +701,7 @@ system_update(){
 
 #-------------------------------------repo function------------------------------------#
 
-#---------- СЕТЕВЫЕ РЕПОЗИТОРИИ РЦИТ ----------#
+##########----------"Сетевые репозитории РЦИТ"----------##########
 repo_rcit(){
     passwd=$(zenity --forms --title="Пароль для администратора" \
         --text="Введите пароль администратора" \
