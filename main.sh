@@ -44,6 +44,7 @@ source $path/item_menu_firma_Kyocera_models.sh
 #---------------init for item_menu_information_pomogator="Обновление и нововведения" menu-------------------------------
 source $path/item_menu_information_pomogator.sh
 
+source $path/item_menu_information_freeipa.sh
 #-------------init menu event-----------------------
 declare -A event_menu
 event_menu["$exit_app"]="exit 1"
