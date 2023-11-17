@@ -1,9 +1,9 @@
 #!/bin/bash
-#---------------init event for item_menu_information_freeipa-------------------------------
-export item_menu_freeipa_install="Установка Freeipa"
-export item_menu_freeipa_connect="Присоединение к Freeipa"
-export items_freeipa_actions=(
-"\"$item_menu_freeipa_install\""
-"\"$item_menu_freeipa_connect\""
+#---------------init event for item_menu_information_aldpro-------------------------------
+export item_menu_aldpro_install="Установка AldPro"
+export item_menu_aldpro_connect="Присоединение ПК к AldPro"
+export items_aldpro_actions=(
+"\"$item_menu_aldpro_install\""
+"\"$item_menu_aldpro_connect\""
 "\"$exit_menu\"" 
 "\"$exit_app\"" )
