@@ -1,44 +1,61 @@
-declare -A event_menu
+#!/bin/bash
+
+# Запускать с правами суперпользователя
+# sudo bash script.sh
+
+# Функция для отображения окна ввода текста
+input_dialog() {
+    zenity --entry --title="$1" --text="$2" --entry-text="$3"
+}
+
+# Функция для отображения окна выбора (D/H)
+choice_dialog() {
+    zenity --list --title="$1" --text="$2" --radiolist --column="" --column="" \
+    FALSE "Домен" FALSE "Хост" --column="Выбор"
+}
+
+# Функция для отображения информационного окна
+info_dialog() {
+    zenity --info --title="$1" --text="$2"
+}
+
+# Функция для отображения окна подтверждения (Да/Нет)
+confirm_dialog() {
+    zenity --question --title="$1" --text="$2"
+}
+
 aldpro_install() {
-	echo '123123123' >> /opt/text.txt
-	# функция информирования о ходе установки скрипта. Первый аргумент - какой этап скрипта выполняется
-	info () {
-			echo ">-----Выполняется: $1"
-			echo -e "\n---###############---Выполняется: $1\n" >> .log
-			sleep 1
-	}
+    info_dialog "Установка ALDPRO" "Добро пожаловать в установщик ALDPRO!"
 
-	# записываем изменения, которые внесли в файл, если указан путь первым аргументом
-	infok () { 
-			if [[ $1 ]]; then
-					echo -e "Содержание измененного файла $1:\n" >> .log
-					cat $1 >> .log
-			fi
+    # Получаем данные от пользователя
+    HSTNAME=$(input_dialog "Хост" "Введите имя хоста:")
+    HOSTIP=$(input_dialog "Хост" "Введите IP текущего хоста:")
+    GATEWAY=$(input_dialog "Хост" "Введите gateway:")
+    NETMASK=$(input_dialog "Хост" "Введите маску:")
+    DNSIP=$(input_dialog "Хост" "Введите IP address dns server:")
+    DCIP=$(input_dialog "Хост" "Введите IP домен контроллера:")
+    DOMAIN=$(input_dialog "Хост" "Введите имя домена:")
+    PASSWORD=$(input_dialog "Хост" "Введите пароль для админа контроллера домена:")
+    ACT=$(choice_dialog "Хост" "Настройка домена или ввод хоста в домен?" "Домен")
+    
+    # Выводим введенные данные для проверки
+    info_dialog "Проверка данных" "Проверьте введенные данные:\n\nИмя хоста: $HSTNAME\nIP адрес хоста: $HOSTIP\nGateway: $GATEWAY\nМаска: $NETMASK\nDNS IP: $DNSIP\nIP домена контроллера: $DCIP\nИмя домена: $DOMAIN\nПароль: $PASSWORD\nДействие: $ACT"
 
-			echo -e "\n>-----OK\n" 
-			echo -e "\n-------OK\n" >> .log
-	}
+    # Записываем изменения в файл
+    infok() {
+        if [[ $1 ]]; then
+            echo -e "Содержание измененного файла $1:\n" >> .log
+            cat $1 >> .log
+        fi
 
-	# проверяем наличие конфигурационного файла для ALDPRO. Если есть, значит первый этап установки был выполнел (часть скрипа, которая 
-	# выполнилась, при условии что этого файла не было). Если файл есть, то выполняется часть скрипа после else 
-	RES="admin"
+        echo -e "\n>-----OK\n"
+        echo -e "\n-------OK\n" >> .log
+    }
+
+    RES="admin"
 	if [[ ! -f /etc/apt/preferences.d/aldpro ]]; then 
-
-			read -p "Введите имя хоста: " HSTNAME
-			read -p "Введите IP текущего хоста: " HOSTIP
-			read -p "Введите gateway: " GATEWAY
-			read -p "Введите маску " NETMASK
-			read -p "Введите IP address dns server: " DNSIP
-			read -p "Введите IP домен контроллера: " DCIP
-			read -p "Введите имя домена: " DOMAIN
-			read -p "Введите пароль для админа контреоллера домена: " PASSWORD
-			read -p "Настройка домена или ввод хоста в домен? D-домен, H-хост: " ACT
-			#read -p "Введите имя сетевого интерфейса: " NETWNAME
-			#read -p "Введите версию AstraLinux в формате х.х.х " ALVERSION
-			#read -p "Введите версию AldPRO в формате х.х.х " ALDPROVERSION
-
-	# проверяем какое дейстивие введено - настройка домена или ввод хоста в домен
-			if [[ $ACT != "H" ]]; then
+	
+	if [[ $ACT != "H" ]]; then
 					while [[ $ACT != "D" ]]
 					do
 							read -p "Enter D or H :" ACT
@@ -238,4 +255,10 @@ EOF
 			fi
 
 	fi
+
+    # Выводим информационное окно перед перезагрузкой
+    confirm_dialog "Перезагрузка" "Перезагрузите компьютер. Запустите скрипт снова из той же папки!"
 }
+
+# Вызываем функцию для установки ALDPRO
+aldpro_install
