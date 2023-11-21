@@ -13,8 +13,6 @@ app_info="Программа помощник: Помогатор АйтекИн
 crypto="Для работы с сайтами использующими ЭЦП для подтверждения входа необходимо устанвить Яндекс браузер!" 
 papki="1.Необходимо перезайти в сессию.\n2. Перезагрузить ПК.\n3. Зайти в учетную запись имяпользователя@domain.name и пароль от windows прошлый ( если пароль устарел сменить его на новый)"
 
-
-
 source $path_items/items_main_menu.sh
 
 source $path_items/item_menu_information_resources.sh
@@ -82,16 +80,7 @@ source $path_events/event_item_menu_information_pomogator.sh
 
 source $path_events/event_item_menu_information_aldpro.sh
 
-
-
-
-
-
-source $path_install_functions/aldpro_install.sh
-
-
-
-
+#source $path_install_functions/aldpro_install.sh
 
 
 info_install_printer(){
