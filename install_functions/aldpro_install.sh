@@ -24,16 +24,13 @@ if [[ ! -f /etc/apt/preferences.d/aldpro ]]; then
 
         read -p "Введите имя хоста: " HSTNAME
         read -p "Введите IP текущего хоста: " HOSTIP
-        read -p "Введите gateway: " GATEWAY
-        read -p "Введите маску " NETMASK
-        read -p "Введите IP address dns server: " DNSIP
+        read -p "Введите gateway(шлюз): " GATEWAY
+        read -p "Введите маску (в виде 255.255.255.0) " NETMASK
+        read -p "Введите IP адрес DNS сервера: " DNSIP
         read -p "Введите IP домен контроллера: " DCIP
-        read -p "Введите имя домена: " DOMAIN
-        read -p "Введите пароль для админа контреоллера домена: " PASSWORD
+        read -p "Введите имя будущего домена (в виде domain.local): " DOMAIN
+        read -p "Введите пароль для админа контроллера домена: " PASSWORD
         read -p "Настройка домена или ввод хоста в домен? D-домен, H-хост: " ACT
-        #read -p "Введите имя сетевого интерфейса: " NETWNAME
-        #read -p "Введите версию AstraLinux в формате х.х.х " ALVERSION
-        #read -p "Введите версию AldPRO в формате х.х.х " ALDPROVERSION
 
 # проверяем какое дейстивие введено - настройка домена или ввод хоста в домен
         if [[ $ACT != "H" ]]; then
