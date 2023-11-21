@@ -36,7 +36,7 @@ if [[ ! -f /etc/apt/preferences.d/aldpro ]]; then
         if [[ $ACT != "H" ]]; then
                 while [[ $ACT != "D" ]]
                 do
-                        read -p "Enter D or H :" ACT
+                        read -p "Введите D(домен) или H(хост) :" ACT
                         if [[ $ACT == "H" ]]; then
                         break
         fi
