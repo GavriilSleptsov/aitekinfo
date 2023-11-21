@@ -3,4 +3,3 @@
 declare -A event_menu
 event_menu["$item_menu_information_aldpro"]="run_menu ${items_aldpro_actions[@]}"
 event_menu["$item_menu_aldpro_install"]="aldpro_install"
-#event_menu["$item_menu_aldpro_connect"]="aldpro_install"
