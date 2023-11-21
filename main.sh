@@ -327,34 +327,6 @@ crypto1290(){
     fi
 }
 
-kaspersky(){
-    if dpkg -l | grep kesl-astra  &>/dev/null; then
-    $(zenity --info --text="Касперский уже установлен!" --height=300 --width=400)
-    else
-    passwd=$(zenity --password)
-    check_cancel
-    zenity --progress --pulsate --title="Установка пакета" --text="Подождите, идет установка..." --auto-close &
-    (
-    echo $passwd | sudo -S wget -O /home/$USER/Desktop/kesl-astra_11.1.0-3013_amd64.deb https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=kaspersky%2Fkesl-astra_11.1.0-3013_amd64.deb
-    echo $passwd | sudo -S dpkg -i /home/$USER/Desktop/kesl-astra_11.1.0-3013_amd64.deb
-    echo $passwd | sudo -S rm /home/$USER/Desktop/kesl-astra_11.1.0-3013_amd64.deb
-    echo $passwd | sudo -S wget -O /home/$USER/Desktop/setup.ini
-    echo $passwd | sudo -S /opt/kaspersky/kesl/bin/kesl-setup.pl --autoinstall=/home/$USER/Desktop/setup.ini
-    echo $passwd | sudo -S rm /home/$USER/Desktop/setup.ini
-    user=$(zenity --entry --text="Введите имя пользователя, чтобы добавить его в группу администраторов Kaspersky:" --height=300 --width=400)
-    echo $passwd | sudo -S usermod -a -G kesluser $user
-    echo $passwd | sudo -S kesl-control --grant-role admin $user
-    exit_code=$?
-    # Проверка кода завершения и отображение соответствующего сообщения
-        if [ $exit_code -eq 0 ]; then
-            zenity --info --title="Успех" --text="Пакет успешно установлен!"
-        else
-            zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
-        fi
-    ) | zenity --progress --pulsate --auto-close
-   fi
-}
-
 finereader(){
     passwd=$(zenity --password)
     check_cancel

@@ -2,13 +2,11 @@
 #---------------init event for item_menu_information_install="Установка программ" menu-------------------------------
 declare -A event_menu
 event_menu["$item_menu_information_install"]="run_menu ${item_menu_install_apps[@]}"
-event_menu["$item_menu_install_kaspersky"]="kaspersky"
 event_menu["$item_menu_install_finereader"]="finereader"
 event_menu["$item_menu_install_crypto1290"]="crypto1290"
 event_menu["$item_menu_install_crypto1145"]="crypto1145"
-event_menu["$item_menu_install_pdf_editor"]="install_apps"
+event_menu["$item_menu_install_pdf_editor"]="$selected_item_menu="master-pdf-editor" | install_apps"
 event_menu["$item_menu_install_telegram"]="install_apps"
-event_menu["$item_menu_install_viber"]="install_apps"
 event_menu["$item_menu_install_whatsapp"]="install_apps"
 event_menu["$item_menu_install_wps"]="install_apps"
 event_menu["$item_menu_install_notepadplus"]="install_apps"
