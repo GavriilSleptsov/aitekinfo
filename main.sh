@@ -375,6 +375,10 @@ system_update(){
     ) | zenity --progress --pulsate --auto-close
 }
 
+
+echo_check () {
+	echo $selected_item_menu >> /tmp/check.txt
+}
 #-------------------------------------repo function------------------------------------#
 
 ##########----------"Сетевые репозитории РЦИТ"----------##########

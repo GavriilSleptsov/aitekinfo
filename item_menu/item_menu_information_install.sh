@@ -1,5 +1,6 @@
 #!/bin/bash
 # #---------------init for item_menu_information_install menu-------------------------------
+echo_check
 export item_menu_install_myoffice="Мой Офис Документы 2.6.0"
 export item_menu_install_finereader="FineReader"
 export item_menu_install_crypto1290="Криптопро.v1290"
