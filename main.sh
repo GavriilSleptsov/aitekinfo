@@ -1,5 +1,5 @@
 #!/bin/bash
-##########----------"Глобальные переменные"----------##########
+
 path=/opt/aitekinfo
 path_items=/opt/aitekinfo/item_menu
 path_events=/opt/aitekinfo/event_item_menu
@@ -13,124 +13,84 @@ app_info="Программа помощник: Помогатор АйтекИн
 crypto="Для работы с сайтами использующими ЭЦП для подтверждения входа необходимо устанвить Яндекс браузер!" 
 papki="1.Необходимо перезайти в сессию.\n2. Перезагрузить ПК.\n3. Зайти в учетную запись имяпользователя@domain.name и пароль от windows прошлый ( если пароль устарел сменить его на новый)"
 
-####################################################################################
-############################## НАЧАЛО БЛОКА item_menu ##############################
-####################################################################################
 
-##########----------"Главное меню"----------##########
+
 source $path_items/items_main_menu.sh
 
-##########----------"Информационные ресурсы"----------##########
 source $path_items/item_menu_information_resources.sh
 
-##########----------"Инструкции"----------##########
 source $path_items/item_menu_information_instructions.sh
 
-##########----------"Что делать, если не работает?"----------##########
 source $path_items/item_menu_information_help.sh
 
-##########----------"Установка программ"----------##########
 source $path_items/item_menu_information_install.sh
 
-##########----------"Удаление программ"----------##########
 source $path_items/item_menu_remove_apps.sh
 
-##########----------"Добавить сетевые репозитори"----------##########
 source $path_items/item_menu_information_repo.sh
 
-##########----------"Драйвера для принтеров"----------##########
 source $path_items/item_menu_information_printers.sh
 
-#---------------init for item_menu_firma_samsung_models menu-------------------------------
 item_driver_Samsung_ML_2851ND="Samsung-ML-2851ND"
 item_menu_govno_printer="printer"
 item_menu_firma_Samsung_models=("\"$item_driver_Samsung_ML_2851ND\"" "\"$item_menu_govno_printer\"" "\"$item_menu_govno_printer\"" "\"$item_menu_govno_printer\"" "\"$item_menu_govno_printer\"" "\"$exit_menu\"" "\"$exit_app\"")
 
-##########----------"Модель принтера Kyocera"----------##########
 source $path_items/item_menu_firma_Kyocera_models.sh
 
-##########----------"Обновление и новвоведения"----------##########
+Обновление и новвоведения
 source $path_items/item_menu_information_pomogator.sh
 
-##########----------"Действия с Freeipa"----------##########
 source $path_items/item_menu_information_freeipa.sh
 
-##########----------"Действия с AldPro"----------##########
 source $path_items/item_menu_information_aldpro.sh
 
-####################################################################################
-############################## КОНЕЦ БЛОКА item_menu ###############################
-####################################################################################
 
 declare -A event_menu
 event_menu["$exit_app"]="exit 1"
 
-###########################################################################################
-############################## НАЧАЛО БЛОКА event_item_menu ###############################
-###########################################################################################
 
-##########----------"Информационные ресурсы"----------##########
+
+
 source $path_events/event_item_menu_information_resources.sh
 
-##########----------"Инструкции"----------##########
 source $path_events/event_item_menu_information_instruction.sh
 
-##########----------"Что делать, если не работает?"----------##########
 event_menu["$item_menu_information_help"]="run_menu ${item_menu_help_all[@]}"
 event_menu["$item_menu_help_papki"]="info_shared_papki"
 event_menu["$item_menu_help_printer"]="info_install_printer"
 
-##########----------"Установка программ"----------##########
 source $path_events/event_item_menu_information_install.sh
 
-##########----------"Удаление программ"----------##########
 source $path_events/event_item_menu_information_remove.sh
 
-##########----------"Добавить сетевые репозитории"----------##########
 source $path_events/event_item_menu_information_repo.sh
 
-##########----------"Драйвера для принтеров"----------##########
 event_menu["$item_menu_information_printers"]="run_menu ${item_menu_firmi_printers[@]}"
 
-##########----------"Фирмы принтеров"----------##########
 event_menu["$item_menu_firma_Samsung"]="run_menu ${item_menu_firma_Samsung_models[@]}"
 event_menu["$item_menu_firma_Kyocera"]="run_menu ${item_menu_firma_Kyocera_models[@]}"
 
-#-------------init menu event for item_menu_firma_Samsung_models Фирма=Самсунг-----------------------
 event_menu["$item_driver_Samsung_ML_2851ND"]="get_drivers"
 
-#-------------init menu event for item_menu_firma_Kyocera_models Фирма=Киосера-----------------------
 source $path_events/event_item_menu_firma_Kyocera_models.sh
 
-##########----------"Действия с FreeIpa"----------##########
 source $path_events/event_item_menu_information_freeipa.sh
 
-##########----------"Обновление системы"----------##########
 event_menu["$item_menu_information_update"]="system_update"
 
-##########----------"Драйвера для принтеров"----------##########
 source $path_events/event_item_menu_information_pomogator.sh
 
-##########----------"Действия с AldPro"----------##########
 source $path_events/event_item_menu_information_aldpro.sh
 
-###########################################################################################
-############################## КОНЕЦ БЛОКА event_item_menu ################################
-###########################################################################################
 
 
-###########################################################################################
-############################## НАЧАЛО БЛОКА install_functions #############################
-###########################################################################################
 
 
-##########----------"Драйвера для принтеров"----------##########
 
 source $path_install_functions/aldpro_install.sh
 
-###########################################################################################
-############################## КОНЕЦ БЛОКА install_functions ##############################
-###########################################################################################
+
+
 
 
 
@@ -142,7 +102,6 @@ info_shared_papki() {
     $(zenity --info --text="$papki" --height=200 --width=300)
 }
 
-##########----------"Check функции"----------##########
 
 check_head_shared(){
     check_head=$(grep "Archives" "/home/$USER/.config/rusbitech/fly-fm-vfs.conf")
@@ -160,7 +119,6 @@ check_cancel(){
         fi
 }
 
-##########----------"Функции"----------##########
 
 get_drivers() {
     mod_selected_item_menu=$(echo "$selected_item_menu" | sed 's/ /+/g')
@@ -215,7 +173,6 @@ remove_app(){
     echo $passwd | sudo -S apt remove "$1" -y
 }
 
-#-------------------------------------domain menu------------------------------------#
 freeipa(){
     $(zenity --info --text="Перед продолжением необходимо в dns указать первым, dns адрес вашего контроллера домена" --height=300 --width=400)
     passwd=$(zenity --password)
@@ -255,7 +212,6 @@ aldpro_install() {
 	fly-term -e "sudo /opt/aitekinfo/install_functions/aldpro_install.sh"
 }
 
-#-------------------------------------soft function------------------------------------#
 anaconda(){
     passwd=$(zenity --password)
     check_cancel
@@ -623,9 +579,7 @@ system_update(){
     ) | zenity --progress --pulsate --auto-close
 }
 
-#-------------------------------------repo function------------------------------------#
 
-##########----------"Сетевые репозитории РЦИТ"----------##########
 repo_rcit(){
     passwd=$(zenity --forms --title="Пароль для администратора" \
         --text="Введите пароль администратора" \
@@ -676,7 +630,6 @@ repo_info(){
  \n✔️ Базовый репозиторий (base) - включает в себя репозиторий main , update и компаненты разработчика (dev) с обновлениями (dev-update)
  \n✔️ Расширенный репозиторий (extended) - Дополнительное ПО" --height=500 --width=500)
 }
-#-------------------------------------pomogator settings function------------------------------------#
 pomogator_update(){
     check_cancel
     if dpkg -s git  &>/dev/null; then
@@ -751,7 +704,6 @@ pomogator_version(){
 }
 
 
-#-------------------------------------main function------------------------------------#
 check_update(){
      if dpkg -s git  &>/dev/null; then
         if dpkg -s curl  &>/dev/null; then
