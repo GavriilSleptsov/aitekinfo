@@ -127,8 +127,9 @@ info_shared_papki() {
     $(zenity --info --text="$papki" --height=200 --width=300)
 }
 
+#######################################################
 ##########----------"Check функции"----------##########
-
+#######################################################
 check_head_shared(){
     check_head=$(grep "Archives" "/home/$USER/.config/rusbitech/fly-fm-vfs.conf")
         if [[ "$check_head" == "" ]]; then
@@ -145,7 +146,13 @@ check_cancel(){
         fi
 }
 
-##########----------"Функции"----------##########
+echo_check () {
+	echo $selected_item_menu >> /tmp/check.txt
+}
+
+#######################################################
+##########----------"Функции"----------################
+#######################################################
 
 get_drivers() {
     mod_selected_item_menu=$(echo "$selected_item_menu" | sed 's/ /+/g')
@@ -199,6 +206,9 @@ remove_app(){
     check_cancel
     echo $passwd | sudo -S apt remove "$1" -y
 }
+
+source $path_install_functions/install_telegram.sh
+
 
 #-------------------------------------domain menu------------------------------------#
 freeipa(){
@@ -373,11 +383,6 @@ system_update(){
             zenity --error --title="Ошибка" --text="Ошибка при установке обновления."
         fi
     ) | zenity --progress --pulsate --auto-close
-}
-
-
-echo_check () {
-	echo $selected_item_menu >> /tmp/check.txt
 }
 #-------------------------------------repo function------------------------------------#
 
