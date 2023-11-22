@@ -237,7 +237,7 @@ freeipa(){
 }
 
 aldpro_install() {
-	fly-term -e "sudo /opt/aitekinfo/install_functions/aldpro_install.sh"
+	fly-term -e "sudo /opt/aitekinfo/install_functions/install_aldpro.sh"
 }
 
 #-------------------------------------soft function------------------------------------#
