@@ -114,6 +114,7 @@ source $path_events/event_item_menu_information_pomogator.sh
 ##########----------"Действия с AldPro"----------##########
 source $path_events/event_item_menu_information_aldpro.sh
 
+source $path_install_functions/install_telegram.sh
 ###########################################################################################
 ############################## КОНЕЦ БЛОКА event_item_menu ################################
 ###########################################################################################
@@ -206,8 +207,6 @@ remove_app(){
     check_cancel
     echo $passwd | sudo -S apt remove "$1" -y
 }
-
-source $path_install_functions/install_telegram.sh
 
 #-------------------------------------domain menu------------------------------------#
 freeipa(){
