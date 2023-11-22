@@ -1,3 +1,4 @@
+declare -A event_menu
 install_app_telegram() {
     passwd=$(zenity --password)
     check_cancel

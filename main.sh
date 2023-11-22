@@ -209,7 +209,6 @@ remove_app(){
 
 source $path_install_functions/install_telegram.sh
 
-
 #-------------------------------------domain menu------------------------------------#
 freeipa(){
     $(zenity --info --text="Перед продолжением необходимо в dns указать первым, dns адрес вашего контроллера домена" --height=300 --width=400)
