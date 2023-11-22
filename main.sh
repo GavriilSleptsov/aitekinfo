@@ -141,9 +141,9 @@ check_head_shared(){
 }
 
 check_cancel(){
-        if [[ $? -eq 1 ]]; then
-        run_menu "${items_main_menu[@]}"
-        fi
+	if [[ $? -eq 1 ]]; then
+    run_menu "${items_main_menu[@]}"
+    fi
 }
 
 echo_check () {
