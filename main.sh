@@ -107,6 +107,8 @@ source $path_events/event_item_menu_information_aldpro.sh
 source $path_install_functions/install_telegram.sh
 
 source $path_install_functions/install_master-pdf-editor.sh
+
+source $path_install_functions/install_remmina.sh
 ###########################################################################################
 ############################## КОНЕЦ БЛОКА event_item_menu ################################
 ###########################################################################################
