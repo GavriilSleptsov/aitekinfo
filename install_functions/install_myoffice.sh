@@ -5,16 +5,11 @@ install_app_myoffice() {
     url="https://slepsov.ru/aitekinfo/myoffice-standard-documents_2.6.0_amd64.deb"
     file="/home/$USER/Desktop/myoffice-standard-documents_2.6.0_amd64.deb"
 
-    # Создание фонового процесса с выводом wget
-    (
-        # Загрузка файла с использованием wget
-        wget -O "$file" "$url" 2>&1 | while read -r line; do
-            # Извлечение процента завершения из строки
-            percent=$(echo "$line" | awk '/[0-9]+%/ {gsub(/\r/, "", $2); print int($2)}')
-            # Обновление прогресс-бара в zenity
-            echo "$percent"
-        done
-    ) | zenity --progress --title="Загрузка файла" --text="Подождите, идет загрузка..." --percentage=0 --auto-close
+    # Отображение окна с сообщением о загрузке файла
+    zenity --info --title="Загрузка файла" --text="Подождите, идет загрузка файла..." --width=300 --height=100 --timeout=10
+
+    # Загрузка файла с использованием wget
+    wget -O "$file" "$url"
 
     # Проверка кода завершения wget
     if [ $? -eq 0 ]; then
