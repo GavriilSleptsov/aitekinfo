@@ -5,13 +5,18 @@ install_app_myoffice() {
     url="https://slepsov.ru/aitekinfo/myoffice-standard-documents_2.6.0_amd64.deb"
     file="/home/$USER/Desktop/myoffice-standard-documents_2.6.0_amd64.deb"
 
-    zenity --info --title="Загрузка файла" --text="Подождите, идет загрузка файла..." --width=300 --height=100
-
-    # Загрузка файла с использованием wget в фоновом режиме
-    wget -O "$file" "$url" &
-
-    # Дождаться завершения wget
-    wait $!
+	zenity --progress --pulsate --title="Загрузка пакета" --text="Подождите, идет загрузка..." &
+    (
+        wget https://slepsov.ru/aitekinfo/myoffice-standard-documents_2.6.0_amd64.deb -P /home/$USER/Desktop/
+		
+		# Проверка кода завершения wget
+		if [ $? -eq 0 ]; then
+			zenity --info --title="Успех" --text="Файл успешно загружен!"
+		else
+			zenity --error --title="Ошибка" --text="Ошибка при загрузке файла."
+			exit 1
+		fi
+    ) | zenity --progress --pulsate --auto-close
 
     # Проверка кода завершения wget
     if [ $? -eq 0 ]; then
