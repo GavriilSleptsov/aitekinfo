@@ -7,17 +7,19 @@ install_app_myoffice() {
 
     # Запуск wget в фоновом режиме для загрузки файла с отображением прогресса
     wget --progress=bar:force -O "$file" "$url" 2>&1 | \
-    zenity --progress --title="Загрузка файла" --text="Подождите, идет загрузка..." --percentage=0 --auto-close --auto-kill
+    stdbuf -oL awk -v var="$file" '/[0-9]+%/ {gsub(/\r/, "", $2); print int($2)}' | \
+    zenity --progress --title="Загрузка файла" --text="Подождите, идет загрузка..." --percentage=0 --auto-close
 
     # Проверка кода завершения wget
     if [ $? -eq 0 ]; then
         zenity --info --title="Успех" --text="Файл успешно загружен!"
     else
         zenity --error --title="Ошибка" --text="Ошибка при загрузке файла."
+        exit 1
     fi
     
     # Установка пакета с указанием прогресса
-    zenity --progress --title="Установка пакета" --text="Подождите, идет установка..." --percentage=0 --auto-kill &
+    zenity --progress --title="Установка пакета" --text="Подождите, идет установка..." --percentage=0 &
     progress=$!
 
     (
@@ -41,5 +43,5 @@ install_app_myoffice() {
         # Завершение цикла, когда значение достигает 100
         ) | zenity --progress --title="Установка пакета" --text="Подождите, идет установка..." --percentage=0 --auto-close
 
-    rm /home/$USER/Desktop/myoffice-standard-documents_2.6.0_amd64.deb
+    rm "$file"
 }
