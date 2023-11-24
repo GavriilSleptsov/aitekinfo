@@ -2,8 +2,19 @@ declare -A event_menu
 install_app_myoffice() {
     passwd=$(zenity --password)
     check_cancel
-    wget https://slepsov.ru/aitekinfo/myoffice-standard-documents_2.6.0_amd64.deb -P /home/$USER/Desktop/
+    url="https://slepsov.ru/aitekinfo/myoffice-standard-documents_2.6.0_amd64.deb"
     file="/home/$USER/Desktop/myoffice-standard-documents_2.6.0_amd64.deb"
+
+    # Запуск wget в фоновом режиме для загрузки файла с отображением прогресса
+    wget --progress=bar:force -O "$file" "$url" 2>&1 | \
+    zenity --progress --title="Загрузка файла" --text="Подождите, идет загрузка..." --percentage=0 --auto-close --auto-kill
+
+    # Проверка кода завершения wget
+    if [ $? -eq 0 ]; then
+        zenity --info --title="Успех" --text="Файл успешно загружен!"
+    else
+        zenity --error --title="Ошибка" --text="Ошибка при загрузке файла."
+    fi
     
     # Установка пакета с указанием прогресса
     zenity --progress --title="Установка пакета" --text="Подождите, идет установка..." --percentage=0 --auto-kill &
