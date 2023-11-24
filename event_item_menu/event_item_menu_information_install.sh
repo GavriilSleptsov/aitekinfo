@@ -15,6 +15,6 @@ event_menu["$item_menu_install_yandex"]="install_app_repo"
 event_menu["$item_menu_install_remina"]="install_app_remmina"
 event_menu["$item_menu_install_xrdp"]="install_app_repo"
 event_menu["$item_menu_install_scan"]="install_app_repo"
-event_menu["$item_menu_install_myoffice"]="xdg-open https://coapi-myoffice.aitekinfo.ru/api/v1/public/a0eb7bb7-d4ef-4450-a0ef-f54ab1642aae/107585007/content?download=true &"
+event_menu["$item_menu_install_myoffice"]="install_app_myoffice"
 
 
