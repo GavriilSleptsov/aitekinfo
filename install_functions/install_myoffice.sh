@@ -3,7 +3,7 @@ install_app_myoffice() {
     passwd=$(zenity --password)
     check_cancel
     wget https://slepsov.ru/aitekinfo/myoffice-standard-documents_2.6.0_amd64.deb -P /home/$USER/Desktop/
-    file="/home/$USER/Desktop/myoffice-standard-documents_2.6.0_amd64.deb.deb"
+    file="/home/$USER/Desktop/myoffice-standard-documents_2.6.0_amd64.deb"
     # Установка пакета с указанием прогресса
     zenity --progress --pulsate --title="Установка пакета" --text="Подождите, идет установка..." --auto-close &
     (
