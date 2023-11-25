@@ -1,4 +1,3 @@
-declare -A event_menu
 install_app_myoffice() {
     passwd=$(zenity --password)
     check_cancel
