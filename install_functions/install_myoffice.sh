@@ -4,7 +4,7 @@ install_app_myoffice() {
     check_cancel
     file="/home/$USER/Desktop/myoffice-standard-documents_2.6.0_amd64.deb"
 
-	zenity --progress --pulsate --title="Загрузка пакета" --text="Подождите, идет загрузка..." &
+	zenity --auto-close &
     (
         wget https://slepsov.ru/aitekinfo/myoffice-standard-documents_2.6.0_amd64.deb -P /home/$USER/Desktop/
 		
@@ -15,10 +15,10 @@ install_app_myoffice() {
 			zenity --error --title="Ошибка" --text="Ошибка при загрузке файла."
 			exit 1
 		fi
-    ) | zenity --progress --pulsate --auto-close
+    ) | zenity --progress --pulsate --title "Загрука пакета" --text "Подождите, идет загрука..." --auto-close
 	
     # Установка пакета
-    zenity --progress --pulsate --title="Установка пакета" --text="Подождите, идет установка..." --auto-close &
+    zenity --auto-close &
     (
         # Установка пакета с использованием sudo и передачей пароля через stdin
         echo $passwd | sudo -S apt install -f "$file" -y
@@ -30,7 +30,7 @@ install_app_myoffice() {
         else
             zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
         fi
-    ) | zenity --progress --pulsate --auto-close
+    ) | zenity --progress --pulsate --title "Установка пакета" --text "Подождите, идет установка..." --auto-close
 
     rm "$file"
 }
