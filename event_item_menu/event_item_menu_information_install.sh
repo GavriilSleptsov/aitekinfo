@@ -3,7 +3,7 @@
 declare -A event_menu
 echo_check
 event_menu["$item_menu_information_install"]="run_menu ${item_menu_install_apps[@]}"
-event_menu["$item_menu_install_finereader"]="finereader"
+event_menu["$item_menu_install_finereader"]="install_app_finereader"
 event_menu["$item_menu_install_crypto1290"]="install_app_crypto1290"
 event_menu["$item_menu_install_pdf_editor"]="install_app_master-pdf-editor"
 event_menu["$item_menu_install_telegram"]="install_app_telegram"

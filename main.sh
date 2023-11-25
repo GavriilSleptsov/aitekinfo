@@ -113,6 +113,8 @@ source $path_install_functions/install_remmina.sh
 source $path_install_functions/install_myoffice.sh
 
 source $path_install_functions/install_crypto1290.sh
+
+source $path_install_functions/install_finereader.sh
 ###########################################################################################
 ############################## КОНЕЦ БЛОКА event_item_menu ################################
 ###########################################################################################
@@ -244,28 +246,6 @@ freeipa(){
 
 aldpro_install() {
 	fly-term -e "sudo /opt/aitekinfo/install_functions/install_aldpro.sh"
-}
-
-finereader(){
-    passwd=$(zenity --password)
-    check_cancel
-    zenity --progress --pulsate --title="Установка пакета" --text="Подождите, идет установка..." --auto-close &
-    (
-    echo $passwd | sudo -S mkdir /opt/finereader/
-    echo $passwd | sudo -S wget -O /opt/finereader/ABBYY_Finereader_8_Portable_kmtz.exe https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=FineReader%2FABBYY_Finereader_8_Portable_kmtz.exe
-    echo $passwd | sudo -S apt install wine -y
-    echo $passwd | sudo -S chmod +x /opt/finereader/ABBYY_Finereader_8_Portable_kmtz.exe
-    echo $passwd | sudo -S wget -O /usr/share/applications/flydesktop/finereader.desktop https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=desktop+and+icons%2Ffinereader.desktop 
-    echo $passwd | sudo -S wget -O /usr/share/pixmaps/finereader.png https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=desktop+and+icons%2Ffinereader.png 
-        exit_code=$?
-    # Проверка кода завершения и отображение соответствующего сообщения
-        if [ $exit_code -eq 0 ]; then
-            zenity --info --title="Успех" --text="Пакет успешно установлен!"
-        else
-            zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
-        fi
-    ) | zenity --progress --pulsate --auto-close
-   
 }
 
 system_update(){
