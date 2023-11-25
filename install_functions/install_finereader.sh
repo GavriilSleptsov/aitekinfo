@@ -1,7 +1,7 @@
 install_app_finereader(){
     passwd=$(zenity --password)
     check_cancel
-    zenity --progress --pulsate --title="Установка пакета" --text="Подождите, идет установка..." --auto-close &
+    zenity --auto-close &
     (
     echo $passwd | sudo -S mkdir /opt/finereader/
     echo $passwd | sudo -S wget -O /opt/finereader/ABBYY_Finereader_8_Portable_kmtz.exe https://slepsov.ru/aitekinfo/ABBYY_Finereader_8_Portable_kmtz.exe
@@ -16,6 +16,6 @@ install_app_finereader(){
         else
             zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
         fi
-    ) | zenity --progress --pulsate --auto-close
+    ) | zenity --progress --pulsate --title "Установка пакета" --text "Подождите, идет установка пакета..." --auto-close
    
 }
