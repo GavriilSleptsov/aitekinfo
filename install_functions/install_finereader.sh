@@ -7,8 +7,8 @@ install_app_finereader(){
     echo $passwd | sudo -S wget -O /opt/finereader/ABBYY_Finereader_8_Portable_kmtz.exe https://slepsov.ru/aitekinfo/ABBYY_Finereader_8_Portable_kmtz.exe
     #echo $passwd | sudo -S apt install wine -y
     echo $passwd | sudo -S chmod +x /opt/finereader/ABBYY_Finereader_8_Portable_kmtz.exe
-    echo $passwd | sudo -S wget -O /usr/share/applications/flydesktop/finereader.desktop https://slepsov.ru/aitekinfo/finereader.desktop
-    echo $passwd | sudo -S wget -O /usr/share/pixmaps/finereader.png https://slepsov.ru/aitekinfo/finereader.png
+    echo $passwd | sudo -S wget -O /usr/share/applications/flydesktop/finereader.desktop https://slepsov.ru/aitekinfo/Desktop\and\icons/finereader.desktop
+    echo $passwd | sudo -S wget -O /usr/share/pixmaps/finereader.png https://slepsov.ru/aitekinfo/Desktop\and\icons/finereader.png
         exit_code=$?
     # Проверка кода завершения и отображение соответствующего сообщения
         if [ $exit_code -eq 0 ]; then
