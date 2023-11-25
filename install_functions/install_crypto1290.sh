@@ -7,15 +7,15 @@ install_app_crypto1290(){
     zenity --auto-close &
     (
     echo $passwd | sudo -S apt install yandex-browser-stable -y
-    wget -O /home/$USER/Desktop/crypto1290.tgz https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=crypto%2Fcrypto1290.tgz
+    wget -O /home/$USER/Desktop/crypto1290.tgz https://slepsov.ru/aitekinfo/crypto1290.tgz
     tar -zxf /home/$USER/Desktop/crypto1290.tgz -C /home/$USER/Desktop/
     # Установка пакета с использованием sudo и передачей пароля через stdin
     echo $passwd | sudo -S fly-term -e "/home/$USER/Desktop/linux-amd64_deb/install_gui.sh"
     echo $passwd | sudo -S rm /home/$USER/Desktop/crypto1290.tgz
     echo $passwd | sudo -S rm -r /home/$USER/Desktop/linux-amd64_deb
     echo $passwd | sudo -S apt install pcscd -y 
-    wget -O /home/$USER/Загрузки/cades-linux-amd64.tar.gz https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=crypto%2Fcades-linux-amd64.tar.gz
-    wget -O /home/$USER/Загрузки/IFCPlugin-x86_64.deb https://gitflic.ru/project/gabidullin-aleks/packets_for_pomogator/blob/raw?file=crypto%2FIFCPlugin-x86_64.deb
+    wget -O /home/$USER/Загрузки/cades-linux-amd64.tar.gz https://slepsov.ru/aitekinfo/cades-linux-amd64.tar.gz
+    wget -O /home/$USER/Загрузки/IFCPlugin-x86_64.deb https://slepsov.ru/aitekinfo/IFCPlugin-x86_64.deb
     echo $passwd | sudo -S dpkg -i /home/$USER/Загрузки/IFCPlugin-x86_64.deb
     echo $passwd | sudo -S rm /home/$USER/Загрузки/IFCPlugin-x86_64.deb
     echo $passwd | sudo -S ln -s /etc/opt/chrome/native-messaging-hosts/ru.rtlabs.ifcplugin.json /etc/chromium/native-messaging-hosts
