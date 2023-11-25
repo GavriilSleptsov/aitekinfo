@@ -3,7 +3,7 @@ install_app_remmina() {
     passwd=$(zenity --password)
     check_cancel
     # Установка пакета с указанием прогресса
-    zenity --progress --pulsate --title="Установка пакета" --text="Подождите, идет установка..." --auto-close &
+    zenity --auto-close &
     (
     # Установка пакета с использованием sudo и передачей пароля через stdin
     echo $passwd | sudo -S apt install remmina -y
@@ -15,5 +15,5 @@ install_app_remmina() {
         else
             zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
         fi
-    ) | zenity --progress --pulsate --auto-close
+    ) | zenity --progress --pulsate --title "Установка пакета" --text "Подождите, идет установка пакета..." --auto-close
 }
