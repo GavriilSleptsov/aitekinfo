@@ -3,6 +3,7 @@ install_app_telegram() {
 	if [ -e "$file_path" ]; then
 			zenity --info --text="Пакет уже установлен!"
 			exit 1
+	check_cancel
 	else 
 		passwd=$(zenity --password)
 		
