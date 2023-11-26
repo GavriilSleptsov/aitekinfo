@@ -5,14 +5,11 @@ install_app_telegram() {
 		check_cancel
 	else 
 		passwd=$(zenity --password)
-		
 		check_cancel
-		
 		file="/home/$USER/Desktop/telegram.deb"
 		zenity --auto-close &
 		(
 			wget http://easyastra.ru/store/telegram.deb -P /home/$USER/Desktop/
-			
 			# Проверка кода завершения wget
 			if [ $? -eq 0 ]; then
 				zenity --info --title="Успех" --text="Файл успешно загружен!"
