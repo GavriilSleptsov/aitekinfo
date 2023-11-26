@@ -1,9 +1,8 @@
 install_app_telegram() {
 	file_path="/usr/share/applications/telegram.desktop"
 	if [ -e "$file_path" ]; then
-			zenity --info --text="Пакет уже установлен!"
-			exit 1
-	check_cancel
+		zenity --info --text="Пакет уже установлен!"
+		check_cancel
 	else 
 		passwd=$(zenity --password)
 		
@@ -33,6 +32,7 @@ install_app_telegram() {
 			# Проверка кода завершения и отображение соответствующего сообщения
 			if [ $exit_code -eq 0 ]; then
 				zenity --info --title="Успех" --text="Пакет успешно установлен!"
+				cp /usr/share/applications/telegram.desktop /home/$USER/Desktop
 			else
 				zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
 			fi
