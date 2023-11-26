@@ -1,6 +1,6 @@
 install_app_remmina() {
 	package_name="remmina"
-	if dpkg -l | grep -q "^!!.*$package_name"; then
+	if dpkg -l | grep $package_name; then
 		zenity --info --text="Пакет уже установлен!"
 		check_cancel
 	else 
