@@ -408,7 +408,6 @@ pomogator_version(){
         fi
 }
 
-
 #-------------------------------------main function------------------------------------#
 check_update(){
      if dpkg -s git  &>/dev/null; then
