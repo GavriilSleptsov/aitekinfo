@@ -29,7 +29,7 @@ install_app_wps() {
 			# Проверка кода завершения и отображение соответствующего сообщения
 			if [ $exit_code -eq 0 ]; then
 				zenity --info --title="Успех" --text="Пакет успешно установлен!"
-				cp $file_path /home/$USER/Desktop
+				#cp $file_path /home/$USER/Desktop
 			else
 				zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
 			fi

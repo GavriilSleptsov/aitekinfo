@@ -31,7 +31,7 @@ install_app_master-pdf-editor() {
 			# Проверка кода завершения и отображение соответствующего сообщения
 			if [ $exit_code -eq 0 ]; then
 				zenity --info --title="Успех" --text="Пакет успешно установлен!"
-				cp /usr/share/applications/masterpdfeditor5.desktop /usr/share/applications/flydesktop/
+				cp $file_path /home/$USER/Desktop/
 			else
 				zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
 			fi
