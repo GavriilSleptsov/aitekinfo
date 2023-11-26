@@ -116,6 +116,8 @@ source $path_install_functions/install_crypto1290.sh
 
 source $path_install_functions/install_finereader.sh
 
+source $path_install_functions/install_whatsapp.sh
+
 ###########################################################################################
 ############################## КОНЕЦ БЛОКА event_item_menu ################################
 ###########################################################################################
