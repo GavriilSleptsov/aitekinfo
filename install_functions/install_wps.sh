@@ -1,5 +1,5 @@
 install_app_wps() {
-	file_path="/usr/share/applications/wps-office-promotheus.desktop"
+	file_path="/usr/share/applications/wps-office-prometheus.desktop"
 	if [ -e "$file_path" ]; then
 		zenity --info --text="Пакет уже установлен!"
 		check_cancel
