@@ -115,6 +115,7 @@ source $path_install_functions/install_myoffice.sh
 source $path_install_functions/install_crypto1290.sh
 
 source $path_install_functions/install_finereader.sh
+
 ###########################################################################################
 ############################## КОНЕЦ БЛОКА event_item_menu ################################
 ###########################################################################################

@@ -14,7 +14,7 @@ install_app_myoffice() {
 			zenity --error --title="Ошибка" --text="Ошибка при загрузке файла."
 			exit 1
 		fi
-    ) | zenity --progress --pulsate --title "Загрука пакета" --text "Подождите, идет загрука..." --auto-close
+    ) | zenity --progress --pulsate --title "Загрука пакета" --text="Подождите, идет загрука..." --auto-close
 	
     # Установка пакета
     zenity --auto-close &
@@ -29,7 +29,7 @@ install_app_myoffice() {
         else
             zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
         fi
-    ) | zenity --progress --pulsate --title "Установка пакета" --text "Подождите, идет установка..." --auto-close
+    ) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
 
     rm "$file"
 }

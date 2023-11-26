@@ -15,5 +15,5 @@ install_app_remmina() {
         else
             zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
         fi
-    ) | zenity --progress --pulsate --title "Установка пакета" --text "Подождите, идет установка пакета..." --auto-close
+    ) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка пакета..." --auto-close
 }

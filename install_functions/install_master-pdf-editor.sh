@@ -14,7 +14,7 @@ install_app_master-pdf-editor() {
 			zenity --error --title="Ошибка" --text="Ошибка при загрузке файла."
 			exit 1
 		fi
-    ) | zenity --progress --pulsate --title "Загрука пакета" --text "Подождите, идет загрука..." --auto-close
+    ) | zenity --progress --pulsate --title "Загрука пакета" --text="Подождите, идет загрука..." --auto-close
 	
     # Установка пакета
     zenity --auto-close &
