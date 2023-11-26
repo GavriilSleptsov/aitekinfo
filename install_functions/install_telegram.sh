@@ -1,13 +1,13 @@
 install_app_telegram() {
-    passwd=$(zenity --password)
-    check_cancel
-	
 	file_path="/usr/share/applications/telegram.desktop"
-	
 	if [ -e "$file_path" ]; then
-		zenity --info --text="Пакет уже установлен!"
-		exit 1
+			zenity --info --text="Пакет уже установлен!"
+			exit 1
 	else 
+		passwd=$(zenity --password)
+		
+		check_cancel
+		
 		file="/home/$USER/Desktop/telegram.deb"
 		zenity --auto-close &
 		(
@@ -22,29 +22,23 @@ install_app_telegram() {
 			fi
 		) | zenity --progress --pulsate --title "Загрузка пакета" --text="Подождите, идет загрузка..." --auto-close
 		
-		# Проверка наличия sudo перед его использованием
-		if command -v sudo >/dev/null 2>&1; then
-			# Установка пакета
-			zenity --auto-close &
-			(
-				# Установка пакета с использованием sudo и передачей пароля через stdin
-				echo $passwd | sudo -Ss apt install "$file" -y -q
-				# Получение кода завершения установки
-				exit_code=$?
-				# Проверка кода завершения и отображение соответствующего сообщения
-				if [ $exit_code -eq 0 ]; then
-					zenity --info --title="Успех" --text="Пакет успешно установлен!"
-				else
-					zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
-				fi
-			) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
-
-			# Проверка наличия файла перед удалением
-			if [ -e "$file" ]; then
-				rm "$file"
+		# Установка пакета
+		zenity --auto-close &
+		(
+			# Установка пакета с использованием sudo и передачей пароля через stdin
+			echo $passwd | sudo -Ss apt install "$file" -y -q
+			# Получение кода завершения установки
+			exit_code=$?
+			# Проверка кода завершения и отображение соответствующего сообщения
+			if [ $exit_code -eq 0 ]; then
+				zenity --info --title="Успех" --text="Пакет успешно установлен!"
+			else
+				zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
 			fi
-		else
-			zenity --error --title="Ошибка" --text="sudo не найден. Установите sudo для продолжения."
+		) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
+		# Проверка наличия файла перед удалением
+		if [ -e "$file" ]; then
+			rm "$file"
 		fi
 	fi
 }
