@@ -25,7 +25,7 @@ install_app_myoffice() {
 		zenity --auto-close &
 		(
 			# Установка пакета с использованием sudo и передачей пароля через stdin
-			echo $passwd | sudo -S apt install -f "$file" -y
+			echo $passwd | sudo -S apt install "$file" -y
 			# Получение кода завершения установки
 			exit_code=$?
 			# Проверка кода завершения и отображение соответствующего сообщения

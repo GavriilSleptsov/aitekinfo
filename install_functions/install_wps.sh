@@ -1,15 +1,15 @@
-install_app_telegram() {
-	file_path="/usr/share/applications/telegram.desktop"
+install_app_wps() {
+	file_path="/usr/share/applications/wps-office-promotheus.desktop"
 	if [ -e "$file_path" ]; then
 		zenity --info --text="Пакет уже установлен!"
 		check_cancel
 	else 
 		passwd=$(zenity --password)
 		check_cancel
-		file="/home/$USER/Desktop/telegram.deb"
+		file="/home/$USER/Desktop/wps-office.deb"
 		zenity --auto-close &
 		(
-			wget http://easyastra.ru/store/telegram.deb -P /home/$USER/Desktop/
+			wget http://easyastra.ru/store/wps-office.deb -P /home/$USER/Desktop/
 			# Проверка кода завершения wget
 			if [ $? -eq 0 ]; then
 				zenity --info --title="Успех" --text="Файл успешно загружен!"
@@ -23,13 +23,13 @@ install_app_telegram() {
 		zenity --auto-close &
 		(
 			# Установка пакета с использованием sudo и передачей пароля через stdin
-			echo $passwd | sudo -S apt install "$file" -y
+			echo $passwd | sudo -Ss apt install "$file" -y -q
 			# Получение кода завершения установки
 			exit_code=$?
 			# Проверка кода завершения и отображение соответствующего сообщения
 			if [ $exit_code -eq 0 ]; then
 				zenity --info --title="Успех" --text="Пакет успешно установлен!"
-				cp /usr/share/applications/telegram.desktop /home/$USER/Desktop
+				cp $file_path /home/$USER/Desktop
 			else
 				zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
 			fi

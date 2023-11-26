@@ -25,13 +25,13 @@ install_app_master-pdf-editor() {
 		zenity --auto-close &
 		(
 			# Установка пакета с использованием sudo и передачей пароля через stdin
-			echo $passwd | sudo -S apt install -f "$file" -y
+			echo $passwd | sudo -S apt install "$file" -y
 			# Получение кода завершения установки
 			exit_code=$?
 			# Проверка кода завершения и отображение соответствующего сообщения
 			if [ $exit_code -eq 0 ]; then
 				zenity --info --title="Успех" --text="Пакет успешно установлен!"
-				cp /usr/share/applications/masterpdfeditor5.desktop /home/$USER/Desktop/
+				cp /usr/share/applications/masterpdfeditor5.desktop /usr/share/applications/flydesktop/
 			else
 				zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
 			fi

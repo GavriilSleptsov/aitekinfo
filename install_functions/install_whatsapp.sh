@@ -23,7 +23,7 @@ install_app_whatsapp() {
 		zenity --auto-close &
 		(
 			# Установка пакета с использованием sudo и передачей пароля через stdin
-			echo $passwd | sudo -Ss apt install "$file" -y -q
+			echo $passwd | sudo -S apt install "$file" -y
 			# Получение кода завершения установки
 			exit_code=$?
 			# Проверка кода завершения и отображение соответствующего сообщения
