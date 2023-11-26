@@ -4,7 +4,7 @@ install_app_telegram() {
 	
 	file_path="/usr/share/applications/telegram.desktop"
 	
-	if [ -e "file_path" ]; then
+	if [ -e "$file_path" ]; then
 		zenity --info --text="Пакет уже установлен!"
 		exit 1
 	else 
