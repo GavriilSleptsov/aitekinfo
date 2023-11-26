@@ -121,6 +121,8 @@ source $path_install_functions/install_whatsapp.sh
 source $path_install_functions/install_wps.sh
 
 source $path_install_functions/install_notepad.sh
+
+source $path_install_functions/install_yandex.sh
 ###########################################################################################
 ############################## КОНЕЦ БЛОКА event_item_menu ################################
 ###########################################################################################
