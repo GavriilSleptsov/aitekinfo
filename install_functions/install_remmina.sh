@@ -1,6 +1,6 @@
 install_app_remmina() {
-	package_name="remmina"
-	if dpkg -l $package_name; then
+	file_path="/usr/share/applications/org.remmina.Remmina.desktop"
+	if [ -e "$file_path" ]; then
 		zenity --info --text="Пакет уже установлен!"
 		check_cancel
 	else 
@@ -16,6 +16,7 @@ install_app_remmina() {
 		# Проверка кода завершения и отображение соответствующего сообщения
 			if [ $exit_code -eq 0 ]; then
 				zenity --info --title="Успех" --text="Пакет успешно установлен!"
+				cp /usr/share/applications/org.remmina.Remmina.desktop /home/$USER/Desktop
 			else
 				zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
 			fi
