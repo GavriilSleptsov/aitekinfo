@@ -20,22 +20,31 @@ install_app_telegram() {
 				zenity --error --title="Ошибка" --text="Ошибка при загрузке файла."
 				exit 1
 			fi
-		) | zenity --progress --pulsate --title "Загрука пакета" --text="Подождите, идет загрука..." --auto-close
+		) | zenity --progress --pulsate --title "Загрузка пакета" --text="Подождите, идет загрузка..." --auto-close
 		
-		# Установка пакета
-		zenity --auto-close &
-		(
-			# Установка пакета с использованием sudo и передачей пароля через stdin
-			echo $passwd | sudo -S apt install -f "$file" -y
-			# Получение кода завершения установки
-			exit_code=$?
-			# Проверка кода завершения и отображение соответствующего сообщения
-			if [ $exit_code -eq 0 ]; then
-				zenity --info --title="Успех" --text="Пакет успешно установлен!"
-			else
-				zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
-			fi
-		) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
+		# Проверка наличия sudo перед его использованием
+		if command -v sudo >/dev/null 2>&1; then
+			# Установка пакета
+			zenity --auto-close &
+			(
+				# Установка пакета с использованием sudo и передачей пароля через stdin
+				echo $passwd | sudo -Ss apt install "$file" -y -q
+				# Получение кода завершения установки
+				exit_code=$?
+				# Проверка кода завершения и отображение соответствующего сообщения
+				if [ $exit_code -eq 0 ]; then
+					zenity --info --title="Успех" --text="Пакет успешно установлен!"
+				else
+					zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
+				fi
+			) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
 
-		rm "$file"
+			# Проверка наличия файла перед удалением
+			if [ -e "$file" ]; then
+				rm "$file"
+			fi
+		else
+			zenity --error --title="Ошибка" --text="sudo не найден. Установите sudo для продолжения."
+		fi
+	fi
 }
