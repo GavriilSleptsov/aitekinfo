@@ -8,9 +8,7 @@ install_app_armgs() {
 		check_cancel
 		zenity --auto-close &
 		(
-			echo $passwd | sudo -S mkdir /home/$USER/Desktop/armgs/
-			echo $passwd | sudo -S mkdir /opt/armgs/
-			wget https://dl.armgs.team/downloads/linux/x64/latest/armgs.tar.xz -P /home/$USER/Desktop/
+			wget https://dl.armgs.team/downloads/linux/x64/latest/armgs.tar.xz -P /home/$USER/Загрузки
 			# Проверка кода завершения wget
 			if [ $? -eq 0 ]; then
 				zenity --info --title="Успех" --text="Файл успешно загружен!"
@@ -24,9 +22,9 @@ install_app_armgs() {
 		zenity --auto-close &
 		(
 			# Установка пакета с использованием sudo и передачей пароля через stdin
-			echo $passwd | sudo -S tar -xf /home/$USER/Desktop/armgs.tar.xz -C /home/$USER/Desktop/armgs
-			echo $passwd | sudo -S rm /home/$USER/Desktop/armgs/armgs.tar.xz 
-			echo $passwd | sudo -S mv -r /home/$USER/Desktop/armgs /opt/armgs
+			echo $passwd | sudo -S mkdir /home/$USER/Загрузки/armgs
+			echo $passwd | sudo -S tar -xf /home/$USER/Загрузки/armgs.tar.xz -C /home/$USER/Загрузки/armgs
+			echo $passwd | sudo -S rm /home/$USER/Загрузки/armgs/armgs.tar.xz 
 			
 			# Получение кода завершения установки
 			#exit_code=$?
