@@ -123,6 +123,8 @@ source $path_install_functions/install_wps.sh
 source $path_install_functions/install_notepad.sh
 
 source $path_install_functions/install_yandex.sh
+
+source $path_install_functions/install_armgs.sh
 ###########################################################################################
 ############################## КОНЕЦ БЛОКА event_item_menu ################################
 ###########################################################################################

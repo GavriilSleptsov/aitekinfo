@@ -11,6 +11,7 @@ export item_menu_install_wps="Установить Wps-Office"
 export item_menu_install_notepadplus="Установить NotepadPlus"
 export item_menu_install_yandex="Установить Yandex-Browser-Stable"
 export item_menu_install_remina="Установить Remmina" 
+export item_menu_install_armgs"Установить АРМ ГС" 
 export item_menu_install_apps=( 
 "\"$item_menu_install_myoffice\""
 "\"$item_menu_install_finereader\""  
@@ -22,6 +23,7 @@ export item_menu_install_apps=(
 "\"$item_menu_install_notepadplus\"" 
 "\"$item_menu_install_yandex\"" 
 "\"$item_menu_install_remina\"" 
+"\"$item_menu_install_armgs\""
 "\"$exit_menu\"" 
 "\"$exit_app\"")
  
