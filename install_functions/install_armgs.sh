@@ -10,7 +10,8 @@ install_app_armgs() {
 		(
 			echo $passwd | sudo -S mkdir /home/$USER/Desktop/armgs/
 			echo $passwd | sudo -S mkdir /opt/armgs/
-			wget https://dl.armgs.team/downloads/linux/x64/latest/armgs.tar.xz -P /home/$USER/Desktop/armgs
+			wget https://dl.armgs.team/downloads/linux/x64/latest/armgs.tar.xz -P /home/$USER/Desktop/
+			echo $passwd | sudo -S mv -r /home/$USER/Desktop/armgs.tar.xz /home/$USER/Desktop/armgs/
 			# Проверка кода завершения wget
 			if [ $? -eq 0 ]; then
 				zenity --info --title="Успех" --text="Файл успешно загружен!"
@@ -24,7 +25,7 @@ install_app_armgs() {
 		zenity --auto-close &
 		(
 			# Установка пакета с использованием sudo и передачей пароля через stdin
-			echo $passwd | sudo -S tar -xf /home/$USER/Desktop/armgs/armgs.tar.xz 
+			echo $passwd | sudo -S tar -xf /home/$USER/Desktop/armgs/armgs.tar.xz -C /home/$USER/Desktop/armgs
 			echo $passwd | sudo -S rm /home/$USER/Desktop/armgs/armgs.tar.xz 
 			echo $passwd | sudo -S mv -r /home/$USER/Desktop/armgs /opt/armgs
 			
