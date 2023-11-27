@@ -9,7 +9,7 @@ install_app_armgs() {
 		file="/home/$USER/Desktop/armgs.tar.xz"
 		zenity --auto-close &
 		(
-			wget https://drive.usercontent.google.com/download?id=18GuRwjuz_nx94lSNQELrmFv1Mpm8H2Ct&export=download&authuser=0&confirm=t&uuid=c712b547-4568-4c7e-8cd9-9749afdf06e9&at=APZUnTX8BlCxQ_F40MZtqmY0Q-MU:1701062602792 -P /home/$USER/Desktop/
+			wget https://disk.yandex.ru/d/hS3bQpiPyVGBmw -P /home/$USER/Desktop/
 			# Проверка кода завершения wget
 			if [ $? -eq 0 ]; then
 				zenity --info --title="Успех" --text="Файл успешно загружен!"
