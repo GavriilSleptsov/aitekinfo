@@ -1,15 +1,15 @@
 install_app_armgs() {
-	file_path="/usr/share/applications/wps-office-prometheus.desktopasdsad"
+	file_path="/opt/armgs/armgs"
 	if [ -e "$file_path" ]; then
 		zenity --info --text="Пакет уже установлен!"
 		check_cancel
 	else 
 		passwd=$(zenity --password)
 		check_cancel
-		file="/home/$USER/Desktop/armgs.tar.xz"
+		file="/opt/armgs/"
 		zenity --auto-close &
 		(
-			wget https://dl.armgs.team/downloads/linux/x64/latest/armgs.tar.xz -P /home/$USER/Desktop/
+			wget https://dl.armgs.team/downloads/linux/x64/latest/armgs.tar.xz -P $file
 			# Проверка кода завершения wget
 			if [ $? -eq 0 ]; then
 				zenity --info --title="Успех" --text="Файл успешно загружен!"
@@ -23,21 +23,20 @@ install_app_armgs() {
 		zenity --auto-close &
 		(
 			# Установка пакета с использованием sudo и передачей пароля через stdin
-			echo $passwd | sudo -Ss apt install "$file" -y -q
+			tar -xf /opt/armgs/armgs.tar.xz
+			rm -r armgs.tar.xz
+			
 			# Получение кода завершения установки
-			exit_code=$?
+			#exit_code=$?
 			# Проверка кода завершения и отображение соответствующего сообщения
-			if [ $exit_code -eq 0 ]; then
-				zenity --info --title="Успех" --text="Пакет успешно установлен!"
+			#if [ $exit_code -eq 0 ]; then
+			#	zenity --info --title="Успех" --text="Пакет успешно установлен!"
 				#cp $file_path /home/$USER/Desktop
-			else
-				zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
-			fi
+			#else
+			#	zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
+			#fi
 		) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
 		# Проверка наличия файла перед удалением
-		if [ -e "$file" ]; then
-			rm "$file"
-		fi
 	fi
 }
 
