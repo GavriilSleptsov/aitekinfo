@@ -1,6 +1,5 @@
 #!/bin/bash
 # #---------------init for item_menu_information_install menu-------------------------------
-echo_check
 export item_menu_install_myoffice="Установить Мой Офис Документы 2.6.0"
 export item_menu_install_finereader="Установить FineReader"
 export item_menu_install_crypto1290="Установить Криптопро.v1290"
@@ -11,7 +10,7 @@ export item_menu_install_wps="Установить Wps-Office"
 export item_menu_install_notepadplus="Установить NotepadPlus"
 export item_menu_install_yandex="Установить Yandex-Browser-Stable"
 export item_menu_install_remina="Установить Remmina" 
-export item_menu_install_armgs"Установить АРМ ГС" 
+export item_menu_install_armgs="Установить АРМ ГС" 
 export item_menu_install_apps=( 
 "\"$item_menu_install_myoffice\""
 "\"$item_menu_install_finereader\""  

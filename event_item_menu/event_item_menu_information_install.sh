@@ -1,7 +1,6 @@
 #!/bin/bash
 #---------------init event for item_menu_information_install="Установка программ" menu-------------------------------
 declare -A event_menu
-echo_check
 event_menu["$item_menu_information_install"]="run_menu ${item_menu_install_apps[@]}"
 event_menu["$item_menu_install_finereader"]="install_app_finereader"
 event_menu["$item_menu_install_crypto1290"]="install_app_crypto1290"
