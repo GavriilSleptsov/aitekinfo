@@ -24,7 +24,7 @@ install_app_armgs() {
 			# Установка пакета с использованием sudo и передачей пароля через stdin
 			echo $passwd | sudo -S mkdir /home/$USER/Загрузки/armgs
 			echo $passwd | sudo -S tar -xf /home/$USER/Загрузки/armgs.tar.xz -C /home/$USER/Загрузки/armgs
-			echo $passwd | sudo -S rm /home/$USER/Загрузки/armgs/armgs.tar.xz 
+			echo $passwd | sudo -S rm /home/$USER/Загрузки/armgs.tar.xz 
 			
 			# Получение кода завершения установки
 			#exit_code=$?
