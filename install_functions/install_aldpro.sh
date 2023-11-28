@@ -106,7 +106,7 @@ EOF
 # обновляем пакеты из репозиториев
         info "обновляем пакеты из репозиториев"
         echo -e "\n"
-        #sudo apt update && sudo apt dist-upgrade -y  #&>> .log 
+        sudo apt update
         infok
 
 # отключаем службу NetworkManager
