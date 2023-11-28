@@ -84,13 +84,13 @@ EOF
         #done < /etc/apt/sources.list
 
         info "добавляем репозитории Astra Linux"
-        echo -e "\ndeb http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4/repository-base 1.7_x86-64 main non-free contrib" | sudo tee /etc/apt/sources.list
-        echo -e "deb http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4/repository-extended 1.7_x86-64 main contrib non-free" | sudo tee -a /etc/apt/sources.list
+        echo -e "\ndeb http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.3/repository-base 1.7_x86-64 main non-free contrib" | sudo tee /etc/apt/sources.list
+        echo -e "deb http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.3/repository-extended 1.7_x86-64 main contrib non-free" | sudo tee -a /etc/apt/sources.list
         infok /etc/apt/sources.list
 
 # добавляем репоизтории ALDPRO
         info "добавляем репоизтории ALDPRO"
-        echo "deb https://download.astralinux.ru/aldpro/stable/repository-main/ 2.0.0 main" >> /etc/apt/sources.list.d/aldpro.list
+        echo "deb https://download.astralinux.ru/aldpro/stable/repository-main/ 2.1.0 main" >> /etc/apt/sources.list.d/aldpro.list
         echo "deb https://download.astralinux.ru/aldpro/stable/repository-extended/ generic main" >> /etc/apt/sources.list.d/aldpro.list
         infok /etc/apt/sources.list.d/aldpro.list
 
@@ -106,7 +106,7 @@ EOF
 # обновляем пакеты из репозиториев
         info "обновляем пакеты из репозиториев"
         echo -e "\n"
-        sudo apt update && sudo apt dist-upgrade -y  #&>> .log 
+        #sudo apt update && sudo apt dist-upgrade -y  #&>> .log 
         infok
 
 # отключаем службу NetworkManager
