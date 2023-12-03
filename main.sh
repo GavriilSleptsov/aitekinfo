@@ -479,7 +479,7 @@ run_menu(){
         rend_menu "${menu_items[@]}"
         if [ $? -eq 0 ]; then
             if [ -n "${event_menu["$selected_item_menu"]}" ]; then 
-			echo_check
+			check_program_installed
             run_event "${event_menu["$selected_item_menu"]}"
             elif  [ "$selected_item_menu" == "$exit_menu" ]; then
                 selected_item_menu=""

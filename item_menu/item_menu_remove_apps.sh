@@ -14,7 +14,9 @@ check_program_installed() {
 export item_menu_remove_telegram="Удалить Telegram"
 
 # Инициализация массива
-export item_menu_remove_apps=("\"$exit_menu\"" "\"$exit_app\"")
+export item_menu_remove_apps=(
+"\"$exit_menu\"" 
+"\"$exit_app\"")
 
 # Проверяем и добавляем программы в массив
 if check_program_installed "telegram"; then
