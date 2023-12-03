@@ -332,9 +332,10 @@ pomogator_update(){
         # Удалите временную папку с репозиторием
         echo $passwd | sudo -S rm -rf "$tmp_folder"
         ) | zenity --progress --pulsate --auto-close
-            $(zenity --question --text "Хотите закрыть приложение для приминения обновления?" --ok-label="Перезапустить" --cancel-label="Отмена" --height=250 --width=200)
+            $(zenity --question --text "Перезапустите прорамму, для применения обновления, сделать это сейчас?" --ok-label="Закрыть" --cancel-label="Отмена" --height=250 --width=200)
             if [[ $? -eq 0 ]]; then
                 exit 0
+				
             fi
     else
         $(zenity --info --text=" У вас не установлена утилита git" --height=150 --width=300)
