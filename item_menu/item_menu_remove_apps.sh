@@ -1,25 +1,43 @@
 #!/bin/bash
-# #-------------init menu event for item_menu_information_install ----------------------
 
-export item_menu_remove_r7="p7-office"
-export item_menu_remove_edge="Microsoft-edge"
-export item_menu_remove_mypaint="my-paint"
-export item_menu_remove_onlyoffice="onlyoffice-desktop"
-export item_menu_remove_pascalABC="PascalABC"
-export item_menu_remove_pinta="Pinta"
-export item_menu_remove_pycharm="Pycharm"
-export item_menu_remove_rudesktop="Rudesktop"
-export item_menu_remove_skype="Skype"
-export item_menu_remove_sublime="Sublime"
-export item_menu_remove_telegram="Удалить Telegram"
-export item_menu_remove_viber="Viber"
-export item_menu_remove_virtualbox="Virtualbox"
-export item_menu_remove_whatsapp="Whatsapp"
-export item_menu_remove_wps="Wps-office"
-export item_menu_remove_code="VScode"
-export item_menu_remove_notepadplus="Notepadplus"
-export item_menu_remove_yandex="Yandex-browser-stable"
-export item_menu_remove_remina="Remmina"
-export item_menu_remove_xrdp="Xrdp"
-export item_menu_remove_seahorse="Seahorse"
-export item_menu_remove_apps=("\"$item_menu_remove_r7\"" "\"$item_menu_remove_edge\"" "\"$item_menu_remove_mypaint\"" "\"$item_menu_remove_onlyoffice\"" "\"$item_menu_remove_pascalABC\"" "\"$item_menu_remove_pinta\"" "\"$item_menu_remove_pycharm\"" "\"$item_menu_remove_rudesktop\"" "\"$item_menu_remove_skype\"" "\"$item_menu_remove_sublime\"" "\"$item_menu_remove_telegram\"" "\"$item_menu_remove_viber\"" "\"$item_menu_remove_virtualbox\"" "\"$item_menu_remove_whatsapp\"" "\"$item_menu_remove_wps\"" "\"$item_menu_remove_code\"" "\"$item_menu_remove_notepadplus\"" "\"$item_menu_remove_yandex\"" "\"$item_menu_remove_remina\"" "\"$item_menu_remove_xrdp\"" "\"$item_menu_remove_seahorse\"" "\"$exit_menu\"" "\"$exit_app\"")
+# Определяем функцию для проверки установки программы
+check_program_installed() {
+    local program_name=$1
+    if command -v $program_name &> /dev/null; then
+        return 0  # Программа установлена
+    else
+        return 1  # Программа не установлена
+    fi
+}
+
+# Инициализация массива
+item_menu_remove_apps=("\"$exit_menu\"" "\"$exit_app\"")
+
+# Проверяем и добавляем программы в массив
+if check_program_installed "telegram"; then
+    item_menu_remove_apps+=("\"$item_menu_remove_telegram\"")
+fi
+
+if check_program_installed "whatsapp"; then
+    item_menu_remove_apps+=("\"$item_menu_remove_whatsapp\"")
+fi
+
+if check_program_installed "wps-office"; then
+    item_menu_remove_apps+=("\"$item_menu_remove_wps\"")
+fi
+
+if check_program_installed "notepadplus"; then
+    item_menu_remove_apps+=("\"$item_menu_remove_notepadplus\"")
+fi
+
+if check_program_installed "yandex-browser-stable"; then
+    item_menu_remove_apps+=("\"$item_menu_remove_yandex\"")
+fi
+
+if check_program_installed "remmina"; then
+    item_menu_remove_apps+=("\"$item_menu_remove_remina\"")
+fi
+
+# Выводим результат
+echo "Массив item_menu_remove_apps:"
+echo "${item_menu_remove_apps[@]}"
