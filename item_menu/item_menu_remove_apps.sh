@@ -3,15 +3,18 @@
 # Определяем функцию для проверки установки программы
 check_program_installed() {
     local program_name=$1
-    if command -v $program_name &> /dev/null; then
+	local file_path="/usr/share/applications/$program_name.desktop"
+    if [ -f "$file_path" ]; then
         return 0  # Программа установлена
     else
         return 1  # Программа не установлена
     fi
 }
 
+export item_menu_remove_telegram="Удалить Telegram"
+
 # Инициализация массива
-item_menu_remove_apps=("\"$exit_menu\"" "\"$exit_app\"")
+export item_menu_remove_apps=("\"$exit_menu\"" "\"$exit_app\"")
 
 # Проверяем и добавляем программы в массив
 if check_program_installed "telegram"; then
@@ -37,7 +40,3 @@ fi
 if check_program_installed "remmina"; then
     item_menu_remove_apps+=("\"$item_menu_remove_remina\"")
 fi
-
-# Выводим результат
-echo "Массив item_menu_remove_apps:"
-echo "${item_menu_remove_apps[@]}"
