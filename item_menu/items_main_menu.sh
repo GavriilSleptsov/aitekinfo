@@ -9,7 +9,6 @@ export item_menu_information_repo="Сетевые репозитории"
 export item_menu_information_printers="Драйвера для принтеров"
 export item_menu_information_freeipa="Действия с Freeipa"
 export item_menu_information_aldpro="Действия с AldPro"
-export item_menu_information_update="Обновить операционную систему"
 export item_menu_information_pomogator="О программе"
 export items_main_menu=( 
 "$item_menu_information_resources" 
@@ -21,6 +20,5 @@ export items_main_menu=(
 "$item_menu_information_printers" 
 "$item_menu_information_freeipa" 
 "$item_menu_information_aldpro" 
-"$item_menu_information_update" 
 "$item_menu_information_pomogator" 
 "$exit_app")

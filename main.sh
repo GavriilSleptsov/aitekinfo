@@ -95,9 +95,6 @@ source $path_events/event_item_menu_firma_Kyocera_models.sh
 ##########----------"Действия с FreeIpa"----------##########
 source $path_events/event_item_menu_information_freeipa.sh
 
-##########----------"Обновление системы"----------##########
-event_menu["$item_menu_information_update"]="system_update"
-
 ##########----------"Драйвера для принтеров"----------##########
 source $path_events/event_item_menu_information_pomogator.sh
 
@@ -258,32 +255,6 @@ aldpro_install() {
 	fly-term -e "sudo /opt/aitekinfo/install_functions/install_aldpro.sh"
 }
 
-system_update(){
-    passwd=$(zenity --password)
-    check_cancel
-    zenity --progress --pulsate --title="Установка обновления" --text="Подождите, идет установка..." --auto-close &
-    (
-    echo $passwd | sudo -S bash -c "echo -e 'deb http://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-main/ 1.7_x86-64 main contrib non-free' > /etc/apt/sources.list"
-    echo $passwd | sudo -S apt update -y
-    echo $passwd | sudo -S apt install ca-certificates -y
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] https://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-base/ 1.7_x86-64 main contrib non-free' > /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] https://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-main/ 1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] https://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-update/ 1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S bash -c "echo -e 'deb [arch=amd64] https://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 main contrib non-free' >> /etc/apt/sources.list"
-    echo $passwd | sudo -S apt update -y   
-    # Установка пакета с использованием sudo и передачей пароля через stdin
-    echo $passwd | sudo -S astra-update -A -r -T
-    # Получение кода завершения установки
-    exit_code=$?
-    # Проверка кода завершения и отображение соответствующего сообщения
-        if [ $exit_code -eq 0 ]; then
-            zenity --info --title="Успех" --text="Система успешно обновлена!"
-        else
-            zenity --error --title="Ошибка" --text="Ошибка при установке обновления."
-        fi
-    ) | zenity --progress --pulsate --auto-close
-}
-#-------------------------------------repo function------------------------------------#
 
 ##########----------"Сетевые репозитории РЦИТ"----------##########
 repo_rcit(){
