@@ -358,7 +358,7 @@ pomogator_update(){
 
 pomogator_news(){
     news=$(curl "https://raw.githubusercontent.com/GavriilSleptsov/aitekinfo/main/news")
-    $(zenity --info --text="Вышло обновление приложения $news " --height=400 --width=700)
+    $(zenity --info --text="$news" --height=350 --width=500)
 
 }
 
