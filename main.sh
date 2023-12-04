@@ -168,47 +168,6 @@ get_drivers() {
 
 }
 
-install_apps() {
-    passwd=$(zenity --password)
-    check_cancel
-    wget http://easyastra.ru/store/"$selected_item_menu".deb -P /home/$USER/Desktop/
-    file="/home/$USER/Desktop/"$selected_item_menu".deb"
-    # Установка пакета с указанием прогресса
-    zenity --progress --pulsate --title="Установка пакета" --text="Подождите, идет установка..." --auto-close &
-    (
-    # Установка пакета с использованием sudo и передачей пароля через stdin
-    echo $passwd | sudo -S apt install -f "$file" -y
-    # Получение кода завершения установки
-    exit_code=$?
-    # Проверка кода завершения и отображение соответствующего сообщения
-        if [ $exit_code -eq 0 ]; then
-            zenity --info --title="Успех" --text="Пакет успешно установлен!"
-        else
-            zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
-        fi
-    ) | zenity --progress --pulsate --auto-close
-    rm /home/$USER/Desktop/"$selected_item_menu".deb
-}
-
-install_app_repo() {
-    passwd=$(zenity --password)
-    check_cancel
-    # Установка пакета с указанием прогресса
-    zenity --progress --pulsate --title="Установка пакета" --text="Подождите, идет установка..." --auto-close &
-    (
-    # Установка пакета с использованием sudo и передачей пароля через stdin
-    echo $passwd | sudo -S apt install "$selected_item_menu" -y
-    # Получение кода завершения установки
-    exit_code=$?
-    # Проверка кода завершения и отображение соответствующего сообщения
-        if [ $exit_code -eq 0 ]; then
-            zenity --info --title="Успех" --text="Пакет успешно установлен!"
-        else
-            zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
-        fi
-    ) | zenity --progress --pulsate --auto-close
-}
-
 remove_app(){
     local passwd=$(zenity --password)
     check_cancel
@@ -479,7 +438,6 @@ run_menu(){
         rend_menu "${menu_items[@]}"
         if [ $? -eq 0 ]; then
             if [ -n "${event_menu["$selected_item_menu"]}" ]; then 
-			source $path_items/item_menu_remove_apps.sh
             run_event "${event_menu["$selected_item_menu"]}"
             elif  [ "$selected_item_menu" == "$exit_menu" ]; then
                 selected_item_menu=""
