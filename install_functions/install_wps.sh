@@ -35,11 +35,9 @@ install_app_wps() {
 						zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
 					fi
 				) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
-		else
-			return
 		fi
 		# Проверка наличия файла перед удалением
-		if [ -e $file ] then;
+		if [ -e $file ]; then
 			rm $file
 		fi
 	fi
