@@ -19,24 +19,27 @@ install_app_armgs() {
 		) | zenity --progress --pulsate --title "Загрузка пакета" --text="Подождите, идет загрузка..." --auto-close
 		
 		# Установка пакета
-		zenity --auto-close &
-		(
-			# Установка пакета с использованием sudo и передачей пароля через stdin
-			echo $passwd | sudo -S mkdir /home/$USER/Загрузки/armgs
-			echo $passwd | sudo -S tar -xf /home/$USER/Загрузки/armgs.tar.xz -C /home/$USER/Загрузки/armgs
-			echo $passwd | sudo -S rm /home/$USER/Загрузки/armgs.tar.xz 
-			
-			# Получение кода завершения установки
-			#exit_code=$?
-			# Проверка кода завершения и отображение соответствующего сообщения
-			#if [ $exit_code -eq 0 ]; then
-			#	zenity --info --title="Успех" --text="Пакет успешно установлен!"
-				#cp $file_path /home/$USER/Desktop
-			#else
-			#	zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
-			#fi
-		) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
-		# Проверка наличия файла перед удалением
+		if [ $? -eq 0 ]; then
+			zenity --auto-close &
+			(
+				# Установка пакета с использованием sudo и передачей пароля через stdin
+				echo $passwd | sudo -S mkdir /home/$USER/Загрузки/armgs
+				echo $passwd | sudo -S tar -xf /home/$USER/Загрузки/armgs.tar.xz -C /home/$USER/Загрузки/armgs
+				echo $passwd | sudo -S rm /home/$USER/Загрузки/armgs.tar.xz 
+				
+				# Получение кода завершения установки
+				#exit_code=$?
+				# Проверка кода завершения и отображение соответствующего сообщения
+				#if [ $exit_code -eq 0 ]; then
+				#	zenity --info --title="Успех" --text="Пакет успешно установлен!"
+					#cp $file_path /home/$USER/Desktop
+				#else
+				#	zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
+				#fi
+			) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
+		else
+			return
+		fi
 	fi
 }
 

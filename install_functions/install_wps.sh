@@ -13,7 +13,15 @@ install_app_wps() {
 			# Проверка кода завершения wget
 			if [ $? -eq 0 ]; then
 				zenity --info --title="Успех" --text="Файл успешно загружен!"
-				zenity --auto-close &
+			else
+				zenity --error --title="Ошибка" --text="Ошибка при загрузке файла."
+				exit 1
+			fi
+		) | zenity --progress --pulsate --title "Загрузка пакета" --text="Подождите, идет загрузка..." --auto-close
+		
+		# Установка пакета
+		if [ $? -eq 0 ]; then
+			zenity --auto-close &
 				(
 					# Установка пакета с использованием sudo и передачей пароля через stdin
 					echo $passwd | sudo -Ss apt install "$file" -y -q
@@ -27,14 +35,10 @@ install_app_wps() {
 						zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
 					fi
 				) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
-				# Проверка наличия файла перед удалением
-				#
-			else
-				zenity --error --title="Ошибка" --text="Ошибка при загрузке файла."
-			fi
-		) | zenity --progress --pulsate --title "Загрузка пакета" --text="Подождите, идет загрузка..." --auto-close
-		if [ -e "$file" ]; then
-			rm "$file"
 		fi
+		# Проверка наличия файла перед удалением
+		if [ -e $file ] then;
+			rm $file
+		if
 	fi
 }

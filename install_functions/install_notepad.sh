@@ -37,6 +37,7 @@ install_app_notepad() {
 		) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
 		else
 			return
+		fi
 		# Проверка наличия файла перед удалением
 		if [ -e "$file" ]; then
 			rm "$file"
