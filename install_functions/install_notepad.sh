@@ -27,16 +27,13 @@ install_app_notepad() {
 						zenity --error --title="Ошибка" --text="Ошибка при установке пакета."
 				fi
 				) | zenity --progress --pulsate --title "Установка пакета" --text="Подождите, идет установка..." --auto-close
-				# Проверка наличия файла перед удалением
-				if [ -e "$file" ]; then
-					rm "$file"
-				fi
-				#
+				
 			else
 				zenity --error --title="Ошибка" --text="Ошибка при загрузке файла."
-				return
 			fi
 		) | zenity --progress --pulsate --title "Загрузка пакета" --text="Подождите, идет загрузка..." --auto-close
-		
+		if [ -e "$file" ]; then
+			rm "$file"
+		fi
 	fi
 }
