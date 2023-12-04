@@ -1,5 +1,6 @@
 install_app_wps() {
 	file_path="/usr/share/applications/wps-office-prometheus.desktop"
+	check_code=0
 	if [ -e "$file_path" ]; then
 		zenity --info --text="Пакет уже установлен!"
 		check_cancel
@@ -15,12 +16,13 @@ install_app_wps() {
 				zenity --info --title="Успех" --text="Файл успешно загружен!"
 			else
 				zenity --error --title="Ошибка" --text="Ошибка при загрузке файла."
+				check_code=1
 				exit 1
 			fi
 		) | zenity --progress --pulsate --title "Загрузка пакета" --text="Подождите, идет загрузка..." --auto-close
 		
 		# Установка пакета
-		if [ $? -eq 0 ]; then
+		if [ $check_code -eq 0 ]; then
 			zenity --auto-close &
 				(
 					# Установка пакета с использованием sudo и передачей пароля через stdin
